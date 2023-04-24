@@ -1,0 +1,75 @@
+import greenfoot.*;
+
+public class UnionRifleman extends Actor
+{
+    private int HP = 100;
+    private int dmg = 10;
+    private int cost = 100;
+    private boolean isPlayer = true;
+    /**
+    public void setEnemy(){
+        if(){
+            isEnemy = true;
+        }
+        isPlayer = true;
+    }
+    */
+    public void act()
+    {
+        int mx;
+        int my;
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        if(mi != null) {
+            mx = mi.getX();
+            my = mi.getY();
+        }
+        int oldX = getX();
+        int oldY = getY();
+        //move(1);
+        if(getX() < 6){
+            setLocation(6, getY());
+        }
+        if(getX() > 14){
+            setLocation(14, getY());
+        }
+        if(getY() < 2){
+            setLocation(getX(), 2);
+        }
+        if(getY() > 11){
+            setLocation(getX(), 11);
+        }
+
+        Actor testEnemy = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
+        Actor testAlly = getOneObjectAtOffset(0, 0, UnionRifleman.class);
+        if(testEnemy != null || testAlly != null){
+            setLocation(oldX, oldY);
+        }
+        if(Greenfoot.mouseClicked(this)) {
+
+        }
+    }
+
+    public int getHP(){
+        return HP;
+    }
+
+    public void setHP(int HP){
+        this.HP = HP;
+    }
+
+    public int getDmg(){
+        return dmg;
+    }
+
+    public void setDmg(int dmg){
+        this.dmg = dmg;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+    
+    public boolean getIsPlayer(){
+        return isPlayer;
+    }
+}
