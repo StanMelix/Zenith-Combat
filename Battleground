@@ -1,0 +1,86 @@
+import greenfoot.*;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Battlefield extends World
+{
+    private int playerCash = 0;
+    private int aiCash = 0;
+    public Battlefield()
+    {    
+        super(21, 14, 60); 
+        setBackground("Battlefield.png");
+        prepare();
+        showText("" + playerCash, 1, 1);
+
+        GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
+        unionTheme.playLoop();
+    }
+
+    private void prepare()
+    {
+        UnionRifleman unionRifleman = new UnionRifleman();
+        UnionRifleman unionRifleman2 = new UnionRifleman();
+        UnionRifleman unionRifleman3 = new UnionRifleman();
+        UnionRifleman unionRifleman4 = new UnionRifleman();
+        List<UnionRifleman> listU = new ArrayList<UnionRifleman>();
+        listU.add(unionRifleman); listU.add(unionRifleman2); listU.add(unionRifleman3); listU.add(unionRifleman4);
+        if(unionRifleman.getIsPlayer() == true){
+            int y = 3;
+            for(int i = 0; i < listU.size(); i++){
+                addObject(listU.get(i), 6, y);
+                y += 2;
+                if(i == 1){y++;}
+            }
+        }
+        else{
+            int y = 3;
+            for(int i = 0; i < listU.size(); i++){
+                addObject(listU.get(i), 14, y);
+                listU.get(i).getImage().mirrorHorizontally();
+                y += 2;
+                if(i == 1){y++;}
+            }
+        }
+        
+        EmpireRifleman empireRifleman = new EmpireRifleman();
+        EmpireRifleman empireRifleman2 = new EmpireRifleman();
+        EmpireRifleman empireRifleman3 = new EmpireRifleman();
+        EmpireRifleman empireRifleman4 = new EmpireRifleman();
+        List<EmpireRifleman> listE = new ArrayList<EmpireRifleman>();
+        listE.add(empireRifleman); listE.add(empireRifleman2); listE.add(empireRifleman3); listE.add(empireRifleman4);
+        if(empireRifleman.getIsPlayer() == true){
+            int y = 3;
+            for(int i = 0; i < listE.size(); i++){
+                addObject(listE.get(i), 6, y);
+                y += 2;
+                if(i == 1){y++;}
+            }
+        }
+        else{
+            int y = 3;
+            for(int i = 0; i < listE.size(); i++){
+                addObject(listE.get(i), 14, y);
+                listE.get(i).getImage().mirrorHorizontally();
+                y += 2;
+                if(i == 1){y++;}
+            }
+        }
+    }
+
+    public int getPlayerCash(){
+        return playerCash;
+    }
+    
+    public void setPlayerCash(int playerCash){
+        this.playerCash = playerCash;
+    }
+    
+    public int getAICash(){
+        return aiCash;
+    }
+    
+    public void setAICash(int aiCash){
+        this.aiCash = aiCash;
+    }
+}
