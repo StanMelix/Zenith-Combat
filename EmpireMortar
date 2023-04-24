@@ -1,0 +1,34 @@
+import greenfoot.*;
+
+public class EmpireMortar extends Actor{
+    private int dmg = 75;
+    private int cost = 750;
+    private boolean isPlayer = false;
+    /**
+    public void setEnemy(){
+        if(){
+            isEnemy = true;
+        }
+        isPlayer = true;
+    }
+    */
+    public void act(){
+
+    }
+
+    public int getDmg(){
+        return dmg;
+    }
+
+    public void setDmg(int dmg){
+        this.dmg = dmg;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+    
+    public boolean getIsPlayer(){
+        return isPlayer;
+    }
+}
