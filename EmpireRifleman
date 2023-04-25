@@ -5,6 +5,7 @@ public class EmpireRifleman extends Actor
     private int HP = 100;
     private int dmg = 10;
     private int cost = 100;
+    
     private boolean isPlayer = false;
     /**
     public void setEnemy(){
@@ -18,7 +19,7 @@ public class EmpireRifleman extends Actor
     {
         int oldX = getX();
         int oldY = getY();
-        move(-1);
+        AImove(-1);
         if(getX() < 6){
             setLocation(6, getY());
         }
@@ -59,8 +60,10 @@ public class EmpireRifleman extends Actor
         return cost;
     }
     
-    public void move(){
-        
+    public void AImove(int distance){
+        while(getX() > 6){
+            setLocation(oldX - distance, oldY);
+        }
     }
     
     public boolean getIsPlayer(){
