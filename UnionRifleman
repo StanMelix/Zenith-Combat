@@ -6,12 +6,13 @@ public class UnionRifleman extends Actor
     private int dmg = 10;
     private int cost = 100;
     private int state = 0;
+    private boolean isPlayer = true;
     public void act()
     {
         MouseInfo mi = Greenfoot.getMouseInfo();
         int oldX = getX();
         int oldY = getY();
-        //move(1);
+        
         if(getX() < 6){
             setLocation(6, getY());
         }
@@ -71,5 +72,8 @@ public class UnionRifleman extends Actor
     public int getCost(){
         return cost;
     }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
 }
-
