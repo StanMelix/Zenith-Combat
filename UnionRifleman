@@ -5,24 +5,10 @@ public class UnionRifleman extends Actor
     private int HP = 100;
     private int dmg = 10;
     private int cost = 100;
-    private boolean isPlayer = true;
-    /**
-    public void setEnemy(){
-        if(){
-            isEnemy = true;
-        }
-        isPlayer = true;
-    }
-    */
+    private int state = 0;
     public void act()
     {
-        int mx;
-        int my;
         MouseInfo mi = Greenfoot.getMouseInfo();
-        if(mi != null) {
-            mx = mi.getX();
-            my = mi.getY();
-        }
         int oldX = getX();
         int oldY = getY();
         //move(1);
@@ -38,14 +24,31 @@ public class UnionRifleman extends Actor
         if(getY() > 11){
             setLocation(getX(), 11);
         }
-
+        if(state == 0) {
+            if(Greenfoot.mouseClicked(this)) {
+                state = 1;
+            }
+        }
+        else if(state == 1) {
+            movement();
+        }
         Actor testEnemy = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
         Actor testAlly = getOneObjectAtOffset(0, 0, UnionRifleman.class);
         if(testEnemy != null || testAlly != null){
             setLocation(oldX, oldY);
         }
-        if(Greenfoot.mouseClicked(this)) {
+    }
 
+    public void movement() {
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        int oldX = getX();
+        int oldY = getY();
+        if(Greenfoot.mouseClicked(null)) {
+            setLocation(mi.getX(), mi.getY());
+            if(getX() > oldX+1 || getX() < oldX-1 || getY() < oldY-1 || getY() > oldY+1) {
+                setLocation(oldX, oldY);
+            }
+            state = 0;
         }
     }
 
@@ -68,8 +71,5 @@ public class UnionRifleman extends Actor
     public int getCost(){
         return cost;
     }
-    
-    public boolean getIsPlayer(){
-        return isPlayer;
-    }
 }
+
