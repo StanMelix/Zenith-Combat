@@ -2,23 +2,29 @@ import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Battleground extends World
+public class Battlefield extends World
 {
     private int playerCash = 0;
     private int aiCash = 0;
-    public Battleground()
+    private int timer = 100;
+    private int turnInt = 0;
+    public Battlefield()
     {    
         super(21, 14, 60); 
-        setBackground("Battleground.png");
+        setBackground("Battlefield.png");
         prepare();
         showText("" + playerCash, 1, 1);
 
         GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
         unionTheme.playLoop();
+        
+        act();
     }
-
+    UnionBase unionBase = new UnionBase();
+    EmpireBase empireBase = new EmpireBase();
     private void prepare()
     {
+        // Initialize/create starting Union Riflemen.
         UnionRifleman unionRifleman = new UnionRifleman();
         UnionRifleman unionRifleman2 = new UnionRifleman();
         UnionRifleman unionRifleman3 = new UnionRifleman();
@@ -42,7 +48,7 @@ public class Battleground extends World
                 if(i == 1){y++;}
             }
         }
-        
+        // Initialize/create starting Empire Riflemen.
         EmpireRifleman empireRifleman = new EmpireRifleman();
         EmpireRifleman empireRifleman2 = new EmpireRifleman();
         EmpireRifleman empireRifleman3 = new EmpireRifleman();
@@ -66,20 +72,52 @@ public class Battleground extends World
                 if(i == 1){y++;}
             }
         }
+        // Create/initialize bases.
+        if(unionBase.getIsPlayer() == true){
+            addObject(unionBase,4,6);
+            addObject(empireBase,16,6);
+            empireBase.getImage().mirrorHorizontally();
+        }
+        else{
+            addObject(empireBase,4,6);
+            addObject(unionBase,16,6);
+            unionBase.getImage().mirrorHorizontally();
+        }
+    }
+    
+    public void act(){
+        // Progresses the game's turns.
+        timer--;
+        if(turnInt == 0){
+            showText("Player", 1, 2);
+        }
+        else{
+            showText("Computer", 1, 2);
+        }
+        
+        if(timer < 0){
+            if(turnInt == 0){turnInt++;}
+            else{turnInt--;}
+            timer = 100;
+        }
+        // Show health amounts for bases and units.
+        if(unionBase.getIsPlayer()){
+            
+        }
     }
 
     public int getPlayerCash(){
         return playerCash;
     }
-    
+
     public void setPlayerCash(int playerCash){
         this.playerCash = playerCash;
     }
-    
+
     public int getAICash(){
         return aiCash;
     }
-    
+
     public void setAICash(int aiCash){
         this.aiCash = aiCash;
     }
