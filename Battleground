@@ -2,14 +2,14 @@ import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Battlefield extends World
+public class Battleground extends World
 {
     private int playerCash = 0;
     private int aiCash = 0;
-    public Battlefield()
+    public Battleground()
     {    
         super(21, 14, 60); 
-        setBackground("Battlefield.png");
+        setBackground("Battleground.png");
         prepare();
         showText("" + playerCash, 1, 1);
 
