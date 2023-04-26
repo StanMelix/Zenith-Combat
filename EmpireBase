@@ -1,0 +1,23 @@
+import greenfoot.*;
+
+public class EmpireBase extends Actor
+{
+    private int HP = 1000;
+    private boolean isPlayer = false;
+    public void act() 
+    {
+        // Add your action code here.
+    }
+    
+    public int getHP(){
+        return HP;
+    }
+    
+    public void setHP(int HP){
+        this.HP = HP;
+    }
+    
+    public boolean getIsPlayer(){
+        return isPlayer;
+    }
+}
