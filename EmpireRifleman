@@ -19,7 +19,9 @@ public class EmpireRifleman extends Actor
     {
         int oldX = getX();
         int oldY = getY();
-        AImove(-1);
+       
+        AImove();
+    
         if(getX() < 6){
             setLocation(6, getY());
         }
@@ -38,8 +40,8 @@ public class EmpireRifleman extends Actor
         if(testEnemy != null || testAlly != null){
             setLocation(oldX, oldY);
         }
-    }
     
+    }
     public int getHP(){
         return HP;
     }
@@ -59,13 +61,15 @@ public class EmpireRifleman extends Actor
     public int getCost(){
         return cost;
     }
-    
-    public void AImove(int distance){
-        while(getX() > 6){
-            setLocation(oldX - distance, oldY);
-        }
+    public void AImove(){
+        move(-1);
+        if(Greenfoot.getRandomNumber(100) < 10){
+          turn(90);  
     }
-    
+    else if(Greenfoot.getRandomNumber(100) > 10){
+        turn(-90);
+}
+}
     public boolean getIsPlayer(){
         return isPlayer;
     }
