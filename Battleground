@@ -151,6 +151,15 @@ public class Battlefield extends World
     public void setAICash(int aiCash){
         this.aiCash = aiCash;
     }
+    private boolean a = true;
+    public void nukeDrop(){
+        NuclearBomb bomb = new NuclearBomb();
+        addObject(bomb, 10, 7);
+    }
+    
+    public static void nukeFinished(boolean nf){
+        //a = nf;
+    }
     
     public static boolean getGameEnd(){
         return gameEnded;
