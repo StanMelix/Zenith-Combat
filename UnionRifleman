@@ -12,7 +12,7 @@ public class UnionRifleman extends Actor
         MouseInfo mi = Greenfoot.getMouseInfo();
         int oldX = getX();
         int oldY = getY();
-        
+
         if(getX() < 6){
             setLocation(6, getY());
         }
@@ -41,15 +41,17 @@ public class UnionRifleman extends Actor
     }
 
     public void movement() {
-        MouseInfo mi = Greenfoot.getMouseInfo();
-        int oldX = getX();
-        int oldY = getY();
-        if(Greenfoot.mouseClicked(null)) {
-            setLocation(mi.getX(), mi.getY());
-            if(getX() > oldX+1 || getX() < oldX-1 || getY() < oldY-1 || getY() > oldY+1) {
-                setLocation(oldX, oldY);
+        if(!(Battlefield.getGameEnd())){
+            MouseInfo mi = Greenfoot.getMouseInfo();
+            int oldX = getX();
+            int oldY = getY();
+            if(Greenfoot.mouseClicked(null)) {
+                setLocation(mi.getX(), mi.getY());
+                if(getX() > oldX+1 || getX() < oldX-1 || getY() < oldY-1 || getY() > oldY+1) {
+                    setLocation(oldX, oldY);
+                }
+                state = 0;
             }
-            state = 0;
         }
     }
 
@@ -72,7 +74,7 @@ public class UnionRifleman extends Actor
     public int getCost(){
         return cost;
     }
-    
+
     public boolean getIsPlayer() {
         return isPlayer;
     }
