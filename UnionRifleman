@@ -1,11 +1,12 @@
 import greenfoot.*;
+import java.util.List;
 
 public class UnionRifleman extends Actor
 {
     private int HP = 100;
     private int dmg = 10;
     private int cost = 100;
-    private int state = 0;
+    public int state = 0;
     private boolean isPlayer = true;
     public void act()
     {
@@ -29,10 +30,19 @@ public class UnionRifleman extends Actor
             if(Greenfoot.mouseClicked(this)) {
                 state = 1;
             }
+            else if(mi != null) {
+                if(mi.getButton() == 3) {
+                    state = 2;
+                }
+            }
         }
         else if(state == 1) {
             movement();
         }
+        else if(state == 2) {
+            attack();
+        }
+
         Actor testEnemy = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
         Actor testAlly = getOneObjectAtOffset(0, 0, UnionRifleman.class);
         if(testEnemy != null || testAlly != null){
@@ -53,6 +63,11 @@ public class UnionRifleman extends Actor
                 state = 0;
             }
         }
+    }
+    
+    public void attack() {
+        MouseInfo mi = Greenfoot.getMouseInfo();
+        
     }
 
     public int getHP(){
