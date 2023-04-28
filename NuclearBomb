@@ -1,0 +1,18 @@
+import greenfoot.*;
+public class NuclearBomb extends Actor
+{
+    private int timer = 0;
+    public void act(){
+        timer++;
+        if(timer == 1){
+            GreenfootSound bombFalling = new GreenfootSound("BombFalling.mp3");
+            bombFalling.play();
+            Greenfoot.delay(180);
+            bombFalling.stop();
+            setImage("Kabloomy.png");
+            GreenfootSound kabloomy = new GreenfootSound("NukeBoom.mp3");
+            kabloomy.play();
+            Battlefield.nukeFinished(true);
+        }
+    }
+}
