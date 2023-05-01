@@ -67,7 +67,7 @@ public class UnionRifleman extends Actor
     
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
-        
+        List<Actor> actors = getObjectsInRange(2, null);
     }
 
     public int getHP(){
