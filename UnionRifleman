@@ -29,6 +29,7 @@ public class UnionRifleman extends Actor
         if(state == 0) {
             if(Greenfoot.mouseClicked(this)) {
                 state = 1;
+                ((Battlefield)getWorld()).attackOrMove();
             }
             else if(mi != null) {
                 if(mi.getButton() == 3) {
