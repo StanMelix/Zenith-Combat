@@ -76,7 +76,20 @@ public class EmpireRifleman extends Actor
         }
     }
 
+    public boolean isNear(){
+        if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public boolean getIsPlayer(){
         return isPlayer;
+    }
+
+    public double getDistance(){
+        return Math.sqrt(Math.abs(UnionRifleman.getX()-getX())^2+Math.abs(UnionRifleman.getY()-getY())^2);;
     }
 }
