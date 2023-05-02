@@ -12,7 +12,9 @@ public class NuclearBomb extends Actor
             setImage("Kabloomy.png");
             GreenfootSound kabloomy = new GreenfootSound("NukeBoom.mp3");
             kabloomy.play();
-            Battlefield.nukeFinished(true);
+        }
+        else if(timer == 180){
+            ((Battlefield)getWorld()).nukeFinished(true);
         }
     }
 }
