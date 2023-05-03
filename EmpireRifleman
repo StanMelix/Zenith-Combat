@@ -89,7 +89,7 @@ public class EmpireRifleman extends Actor
         return isPlayer;
     }
 
-    public double getDistance(){
-        return Math.sqrt(Math.abs(UnionRifleman.getX()-getX())^2+Math.abs(UnionRifleman.getY()-getY())^2);;
+    public double getDistance(Actor a){
+        return Math.sqrt(Math.abs(a.getX()-getX())^2+Math.abs(a.getY()-getY())^2);
     }
 }
