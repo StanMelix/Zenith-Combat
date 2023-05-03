@@ -1,7 +1,7 @@
 import greenfoot.*;
 import java.util.List;
 
-public class UnionRifleman extends Actor
+public class UnionRifleman extends UnionUnit
 {
     private int HP = 100;
     private int dmg = 10;
@@ -27,12 +27,14 @@ public class UnionRifleman extends Actor
             setLocation(getX(), 11);
         }
         if(state == 0) {
-            if(mi != null && Greenfoot.mouseClicked(this)) {
+            if(Greenfoot.mouseClicked(this)) {
                 state = 1;
                 ((Battlefield)getWorld()).attackOrMove(this);
             }
-            else if(mi != null && mi.getButton() == 3) {
-                state = 2;
+            else if(mi != null) {
+                if(mi.getButton() == 3) {
+                    state = 2;
+                }
             }
         }
         else if(state == 1) {
@@ -63,17 +65,10 @@ public class UnionRifleman extends Actor
             }
         }
     }
-
+    
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
-        List<Actor> inRange = getObjectsInRange(2, null);
-        if(mi != null && Greenfoot.mouseClicked(null)) {
-            List<Actor> list = getWorld().getObjectsAt(mi.getX(), mi.getY(), null);
-            Actor Enemy = list.get(0);
-            if(inRange.contains(list.get(0)) && Greenfoot.mouseClicked(Enemy)) {
-                getWorld().removeObject(Enemy);
-            }
-        }
+        List<Actor> actors = getObjectsInRange(2, null);
         state = 0;
     }
 
