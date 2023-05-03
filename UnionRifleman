@@ -68,7 +68,14 @@ public class UnionRifleman extends Actor
     
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
-        List<Actor> actors = getObjectsInRange(2, null);
+        List<Actor> inRange = getObjectsInRange(2, null);
+        if(mi != null && Greenfoot.mouseClicked(null)) {
+            List<Actor> list = getWorld().getObjectsAt(mi.getX(), mi.getY(), null);
+            Actor Enemy = list.get(0);
+            if(inRange.contains(list.get(0)) && Greenfoot.mouseClicked(Enemy)) {
+                getWorld().removeObject(Enemy);
+            }
+        }
         state = 0;
     }
 
