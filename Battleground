@@ -183,4 +183,7 @@ public class Battlefield extends World
     public static boolean getGameEnd(){
         return gameEnded;
     }
+     public void spendMoney(int spentCash){
+        playerCash = playerCash - spentCash;
+    }
 }
