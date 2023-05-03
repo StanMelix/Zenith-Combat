@@ -19,4 +19,10 @@ public class NuclearBomb extends Actor
             ((Battlefield)getWorld()).nukeFinished(true);
         }
     }
+    public int getCost(){
+        return cost;
+    }
+    public int getDamage(){
+        return dmg;
+    }
 }
