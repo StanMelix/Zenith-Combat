@@ -27,14 +27,12 @@ public class UnionRifleman extends Actor
             setLocation(getX(), 11);
         }
         if(state == 0) {
-            if(Greenfoot.mouseClicked(this)) {
+            if(mi != null && Greenfoot.mouseClicked(this)) {
                 state = 1;
                 ((Battlefield)getWorld()).attackOrMove(this);
             }
-            else if(mi != null) {
-                if(mi.getButton() == 3) {
-                    state = 2;
-                }
+            else if(mi != null && mi.getButton() == 3) {
+                state = 2;
             }
         }
         else if(state == 1) {
@@ -65,7 +63,7 @@ public class UnionRifleman extends Actor
             }
         }
     }
-    
+
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
         List<Actor> inRange = getObjectsInRange(2, null);
