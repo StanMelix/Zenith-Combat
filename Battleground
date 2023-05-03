@@ -154,14 +154,20 @@ public class Battlefield extends World
     
     AttackButton attackButton = new AttackButton();
     MoveButton moveButton = new MoveButton();
-    public void attackOrMove(){
+    UnionRifleman selected = new UnionRifleman();
+    public void attackOrMove(UnionRifleman selected){
+        this.selected = selected;
         addObject(attackButton, 1, 3);
         addObject(moveButton, 1, 5);
         if(Greenfoot.mouseClicked(attackButton)){
-            //UnionRifleman.movement();
+            removeObject(attackButton);
+            removeObject(moveButton);
+            selected.attacking();
         }
         else if(Greenfoot.mouseClicked(moveButton)){
-            
+            removeObject(attackButton);
+            removeObject(moveButton);
+            selected.movement();
         }
     }
     
