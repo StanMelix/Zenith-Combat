@@ -156,13 +156,14 @@ public class Battlefield extends World
     MoveButton moveButton = new MoveButton();
     UnionRifleman selected = new UnionRifleman();
     public void attackOrMove(UnionRifleman selected){
+        System.out.println("fadhflajhdg");
         this.selected = selected;
         addObject(attackButton, 1, 3);
         addObject(moveButton, 1, 5);
         if(Greenfoot.mouseClicked(attackButton)){
             removeObject(attackButton);
             removeObject(moveButton);
-            selected.attacking();
+            selected.attack();
         }
         else if(Greenfoot.mouseClicked(moveButton)){
             removeObject(attackButton);
@@ -182,8 +183,5 @@ public class Battlefield extends World
     
     public static boolean getGameEnd(){
         return gameEnded;
-    }
-     public void spendMoney(int spentCash){
-        playerCash = playerCash - spentCash;
     }
 }
