@@ -10,6 +10,7 @@ public class UnionRifleman extends Actor
     private boolean isPlayer = true;
     public void act()
     {
+        ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
         MouseInfo mi = Greenfoot.getMouseInfo();
         int oldX = getX();
         int oldY = getY();
