@@ -18,6 +18,7 @@ public class EmpireRifleman extends Actor
      */
     public void act()
     {
+        ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
         int oldX = getX();
         int oldY = getY();
 
