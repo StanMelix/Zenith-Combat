@@ -1,7 +1,7 @@
 import greenfoot.*;
 import java.util.List;
 
-public class UnionRifleman extends UnionUnit
+public class UnionRifleman extends Actor
 {
     private int HP = 100;
     private int dmg = 10;
@@ -27,14 +27,19 @@ public class UnionRifleman extends UnionUnit
             setLocation(getX(), 11);
         }
         if(state == 0) {
-            if(Greenfoot.mouseClicked(this)) {
+            if(mi != null && Greenfoot.mouseClicked(this)) {
                 state = 1;
+                for(int x = getX() - 1; x <= getX() + 1; x += 1) {
+                    for(int y = getY() - 1; y <= getY() + 1; y += 1) {
+                        if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
+                            getWorld().addObject(new MoveCell(), x, y);
+                        }
+                    }
+                }
                 ((Battlefield)getWorld()).attackOrMove(this);
             }
-            else if(mi != null) {
-                if(mi.getButton() == 3) {
-                    state = 2;
-                }
+            else if(mi != null && mi.getButton() == 3) {
+                state = 2;
             }
         }
         else if(state == 1) {
@@ -61,14 +66,22 @@ public class UnionRifleman extends UnionUnit
                 if(getX() > oldX+1 || getX() < oldX-1 || getY() < oldY-1 || getY() > oldY+1) {
                     setLocation(oldX, oldY);
                 }
+                getWorld().removeObjects(getWorld().getObjects(MoveCell.class));
                 state = 0;
             }
         }
     }
-    
+
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
-        List<Actor> actors = getObjectsInRange(2, null);
+        List<Actor> inRange = getObjectsInRange(2, null);
+        if(mi != null && Greenfoot.mouseClicked(null)) {
+            List<Actor> list = getWorld().getObjectsAt(mi.getX(), mi.getY(), null);
+            Actor Enemy = list.get(0);
+            if(inRange.contains(list.get(0)) && Greenfoot.mouseClicked(Enemy)) {
+                getWorld().removeObject(Enemy);
+            }
+        }
         state = 0;
     }
 
