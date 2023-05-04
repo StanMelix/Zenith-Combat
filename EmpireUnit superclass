@@ -1,1 +1,8 @@
-TBA
+import greenfoot.*;
+
+public class EmpireUnit extends Actor
+{
+    public void act(){
+       
+    }
+}
