@@ -8,13 +8,14 @@ public class UnionRifleman extends Actor
     private int cost = 100;
     public int state = 0;
     private boolean isPlayer = true;
+    private boolean mousePressed;
     public void act()
     {
         ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
         MouseInfo mi = Greenfoot.getMouseInfo();
         int oldX = getX();
         int oldY = getY();
-
+        
         if(getX() < 6){
             setLocation(6, getY());
         }
@@ -27,8 +28,20 @@ public class UnionRifleman extends Actor
         if(getY() > 11){
             setLocation(getX(), 11);
         }
+        
+        //determines if mouse is being held or not
+        if(!mousePressed) {
+            mousePressed = Greenfoot.mousePressed(null);
+        }
+        else {
+            mousePressed = !Greenfoot.mouseClicked(null);
+        }
+        
+        
+        //battlefield left X bound = 6, right X bound = 14
+        //battlefield top Y bound = 2, battlefield bottom Y bound = 11
         if(state == 0) {
-            if(mi != null && Greenfoot.mouseClicked(this)) {
+            if(mi != null && mi.getButton() == 1 && mi.getX() == getX() && mi.getY() == getY() && !mousePressed) {
                 state = 1;
                 for(int x = getX() - 1; x <= getX() + 1; x += 1) {
                     for(int y = getY() - 1; y <= getY() + 1; y += 1) {
@@ -39,8 +52,16 @@ public class UnionRifleman extends Actor
                 }
                 ((Battlefield)getWorld()).attackOrMove(this);
             }
-            else if(mi != null && mi.getButton() == 3) {
+            else if(mi != null && mi.getButton() == 3 && mi.getX() == getX() && mi.getY() == getY() && !mousePressed) {
                 state = 2;
+                for(int x = getX() - 2; x <= getX() + 2; x += 1) {
+                    for(int y = getY() - 2; y <= getY() + 2; y += 1) {
+                        if(getWorld().getObjectsAt(x,y,EmpireRifleman.class).size() == 1) {
+                            getWorld().addObject(new AttackCell(), x, y);
+                        }
+                    }
+                }
+                ((Battlefield)getWorld()).attackOrMove(this);
             }
         }
         else if(state == 1) {
@@ -76,13 +97,8 @@ public class UnionRifleman extends Actor
     public void attack() {
         MouseInfo mi = Greenfoot.getMouseInfo();
         List<Actor> inRange = getObjectsInRange(2, null);
-        if(mi != null && Greenfoot.mouseClicked(null)) {
-            List<Actor> list = getWorld().getObjectsAt(mi.getX(), mi.getY(), null);
-            Actor Enemy = list.get(0);
-            if(inRange.contains(list.get(0)) && Greenfoot.mouseClicked(Enemy)) {
-                getWorld().removeObject(Enemy);
-            }
-        }
+        //attack code here
+        //getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
         state = 0;
     }
 
