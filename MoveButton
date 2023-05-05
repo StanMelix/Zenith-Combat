@@ -1,0 +1,13 @@
+import greenfoot.*;
+public class MoveButton extends Actor
+{
+    public void act() 
+    {
+        if(Greenfoot.mouseClicked(this)){
+            System.out.println("Move clicked");
+            ((Battlefield)getWorld()).removeObject(((Battlefield)getWorld()).attackButton);
+            (((Battlefield)getWorld()).selected).movement();
+            ((Battlefield)getWorld()).removeObject(this);
+        }
+    }    
+}
