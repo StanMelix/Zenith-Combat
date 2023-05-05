@@ -160,17 +160,9 @@ public class Battlefield extends World
         this.selected = selected;
         addObject(attackButton, 1, 3);
         addObject(moveButton, 1, 5);
-        if(Greenfoot.mouseClicked(attackButton)){
-            removeObject(attackButton);
-            removeObject(moveButton);
-            selected.attack();
-        }
-        else if(Greenfoot.mouseClicked(moveButton)){
-            removeObject(attackButton);
-            removeObject(moveButton);
-            selected.movement();
-        }
     }
+    
+    
     
     public void nukeDrop(){
         NuclearBomb bomb = new NuclearBomb();
