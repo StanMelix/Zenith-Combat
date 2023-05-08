@@ -162,7 +162,12 @@ public class Battlefield extends World
         addObject(moveButton, 1, 5);
     }
     
-    
+    public void dealDamage(){
+        List<EmpireUnit> toDmg = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
+        for(int i = 0; i < toDmg.size(); i++){
+            (toDmg.get(i)).setHP(-200);
+        }
+    }
     
     public void nukeDrop(){
         NuclearBomb bomb = new NuclearBomb();
