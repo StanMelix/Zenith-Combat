@@ -1,0 +1,12 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+public class MoveCell extends Actor
+{
+    public void act() 
+    {
+        Actor selected = ((Battlefield)getWorld()).selected;
+        if(Greenfoot.mouseClicked(this)) {
+            selected.setLocation(getX(), getY());
+            getWorld().removeObjects(getWorld().getObjects(MoveCell.class));
+        }
+    }    
+}
