@@ -50,7 +50,7 @@ public class EmpireRifleman extends Actor
     }
 
     public void setHP(int HP){
-        this.HP = HP;
+        super.setHP(HP);
     }
 
     public int getDmg(){
