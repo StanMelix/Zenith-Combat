@@ -2,12 +2,87 @@ import greenfoot.*;
 
 public class EmpireUnit extends Actor
 {
-    private int HP = 0;
-    public void act(){
-       
+    private int HP = 100;
+    private int dmg = 10;
+    private int cost = 100;
+    
+    public EmpireUnit(int HP, int dmg, int cost) {
+        this.HP = HP;
+        this.dmg = dmg;
+        this.cost = cost;
     }
     
+    public void act()
+    {
+        ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
+        int oldX = getX();
+        int oldY = getY();
+
+        AImove();
+
+        if(getX() < 6){
+            setLocation(6, getY());
+        }
+        if(getX() > 14){
+            setLocation(14, getY());
+        }
+        if(getY() < 2){
+            setLocation(getX(), 2);
+        }
+        if(getY() > 11){
+            setLocation(getX(), 11);
+        }
+
+        Actor testEnemy = getOneObjectAtOffset(0, 0, UnionRifleman.class);
+        Actor testAlly = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
+        if(testEnemy != null || testAlly != null){
+            setLocation(oldX, oldY);
+        }
+
+    }
+
+    public int getHP(){
+        return HP;
+    }
+
     public void setHP(int HP){
-        this.HP = HP;
+        this.HP -= HP;
+    }
+
+    public int getDmg(){
+        return dmg;
+    }
+
+    public void setDmg(int dmg){
+        this.dmg = dmg;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+
+    public void AImove(){
+        if(!(Battlefield.getGameEnd())){
+            setLocation(getX() - 1, getY());
+            if(Greenfoot.getRandomNumber(100) < 10){
+                turn(90);  
+            }
+            else if(Greenfoot.getRandomNumber(100) > 10){
+                turn(-90);
+            }
+        }
+    }
+
+    public boolean isNear(){
+        if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public double getDistance(Actor a){
+        return Math.sqrt(Math.abs(a.getX()-getX())^2+Math.abs(a.getY()-getY())^2);
     }
 }
