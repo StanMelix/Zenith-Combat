@@ -3,90 +3,11 @@ import java.util.List;
 
 public class UnionRifleman extends UnionUnit
 {
-    private int HP = 100;
-    private int dmg = 10;
-    private int cost = 100;
-    public int state = 0;
-    private boolean isPlayer = true;
-    private boolean mousePressed;
-    public void act()
-    {
-        ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
-        MouseInfo mi = Greenfoot.getMouseInfo();
-        int oldX = getX();
-        int oldY = getY();
-
-        if(getX() < 6){
-            setLocation(6, getY());
-        }
-        if(getX() > 14){
-            setLocation(14, getY());
-        }
-        if(getY() < 2){
-            setLocation(getX(), 2);
-        }
-        if(getY() > 11){
-            setLocation(getX(), 11);
-        }
-
-        if(Greenfoot.mouseClicked(this)) {
-            ((Battlefield)getWorld()).attackOrMove(this);
-        } 
-        Actor testEnemy = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
-        Actor testAlly = getOneObjectAtOffset(0, 0, UnionRifleman.class);
-        if(testEnemy != null || testAlly != null){
-            setLocation(oldX, oldY);
-        }
+    public boolean isPlayer = true;
+    public UnionRifleman() {
+        super(100, 10, 100);
     }
-
-    public void movement() {
-        if(!(Battlefield.getGameEnd())){
-            //battlefield left X bound = 6, right X bound = 14
-            //battlefield top Y bound = 2, battlefield bottom Y bound = 11
-            for(int x = getX() - 1; x <= getX() + 1; x += 1) {
-                for(int y = getY() - 1; y <= getY() + 1; y += 1) {
-                    if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
-                        getWorld().addObject(new MoveCell(), x, y);
-                        System.out.println("Created movecell at "+x+" "+y);
-                    }
-                }
-            }
-            
-        }
-    }
-
-    public void attack() {
-        //battlefield left X bound = 6, right X bound = 14
-        //battlefield top Y bound = 2, battlefield bottom Y bound = 11
-        for(int x = getX() - 2; x <= getX() + 2; x += 1) {
-            for(int y = getY() - 2; y <= getY() + 2; y += 1) {
-                if(getWorld().getObjectsAt(x,y,EmpireRifleman.class).size() == 1) {
-                    getWorld().addObject(new AttackCell(), x, y);
-                }
-            }
-        }
-    }
-
-    public int getHP(){
-        return HP;
-    }
-
-    public void setHP(int HP){
-        super.setHP(HP);
-    }
-
-    public int getDmg(){
-        return dmg;
-    }
-
-    public void setDmg(int dmg){
-        this.dmg = dmg;
-    }
-
-    public int getCost(){
-        return cost;
-    }
-
+    
     public boolean getIsPlayer() {
         return isPlayer;
     }
