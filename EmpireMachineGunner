@@ -1,0 +1,13 @@
+import greenfoot.*;
+
+public class EmpireMachineGunner extends EmpireUnit
+{
+    public boolean isPlayer = false;
+    public EmpireMachineGunner() {
+        super(125, 15, 2);
+    }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
+}
