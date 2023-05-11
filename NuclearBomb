@@ -12,6 +12,7 @@ public class NuclearBomb extends Actor
             Greenfoot.delay(180);
             bombFalling.stop();
             setImage("Kabloomy.png");
+            ((Battlefield)getWorld()).dealDamage();
             GreenfootSound kabloomy = new GreenfootSound("NukeBoom.mp3");
             kabloomy.play();
         }
