@@ -1,0 +1,38 @@
+import greenfoot.*;
+import java.util.List;
+
+public class UnionTurret extends Actor
+{
+    private int dmg = 10;
+    private int cost = 100;
+    private boolean isPlayer = true;
+    private boolean hasAttacked = false;
+    
+    public UnionTurret(int dmg, int cost) {
+        this.dmg = dmg;
+        this.cost = cost;
+        if(!isPlayer){
+            getImage().mirrorHorizontally();
+        }
+    }
+    
+    public void act(){
+
+    }
+
+    public int getDmg(){
+        return dmg;
+    }
+
+    public void setDmg(int dmg){
+        this.dmg = dmg;
+    }
+
+    public int getCost(){
+        return cost;
+    }
+    
+    public boolean getIsPlayer(){
+        return isPlayer;
+    }
+}
