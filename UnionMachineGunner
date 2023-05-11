@@ -1,0 +1,13 @@
+import greenfoot.*;
+
+public class UnionMachineGunner extends UnionUnit
+{
+    public boolean isPlayer = true;
+    public UnionMachineGunner() {
+        super(125, 15, 2);
+    }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
+}
