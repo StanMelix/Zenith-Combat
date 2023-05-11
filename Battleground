@@ -1,7 +1,6 @@
 import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;
-
 public class Battlefield extends World
 {
     private int playerCash = 0;
@@ -9,28 +8,22 @@ public class Battlefield extends World
     //private int timer = 100;
     private int turnInt = 0;
     private static boolean gameEnded = false;
-    //ReadyButton readyButton = new ReadyButton();
+    ReadyButton readyButton = new ReadyButton();
+    UnionUnit selected;
+    UnionBase unionBase = new UnionBase();
+    EmpireBase empireBase = new EmpireBase();
+    AttackButton attackButton = new AttackButton();
+    MoveButton moveButton = new MoveButton();
     public Battlefield()
     {    
         super(21, 14, 60); 
-        addObject(new Button("Rifleman",100), 3,0);
-        addObject(new Button("Rifleman",100), 5,0);
-        addObject(new Button("Rifleman",100), 7,0);
-        addObject(new Button("Rifleman",100), 9,0);
-        addObject(new Button("Rifleman",100), 11,0);
-        addObject(new Button("Rifleman",100), 13,0);
-        addObject(new Button("Rifleman",100), 15,0);
-        addObject(new Button("Rifleman",100), 17,0);
-        addObject(new Button("Rifleman",100), 19,0);
         setBackground("Battlefield.png");
         prepare();
         showText("" + playerCash, 1, 1);
-
         GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
         unionTheme.playLoop();
     }
-    UnionBase unionBase = new UnionBase();
-    EmpireBase empireBase = new EmpireBase();
+    
     private void prepare()
     {
         // Initialize/create starting Union Riflemen.
@@ -92,10 +85,9 @@ public class Battlefield extends World
             addObject(unionBase,16,6);
             unionBase.getImage().mirrorHorizontally();
         }
-        //addObject(readyButton,19,3);
+        addObject(readyButton,19,3);
         showText("Player", 1, 2);
     }
-
     public void act(){
         if(unionBase.getHP() == 0 || empireBase.getHP() == 0){
             // Ends the game if one of the bases is destroyed.
@@ -120,64 +112,60 @@ public class Battlefield extends World
         else{
             // Progresses the game's turns.
             //timer--;
-            //if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
+            if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(300);
                 showText("Player", 1, 2);
                 turnInt = 0;
-            //}
-
+            }
             //if(timer < 0){
             //    if(turnInt == 0){turnInt++;}
             //    else{turnInt--;}
             //    timer = 100;
             //}
             // Show health amounts for bases and units.
-            if(unionBase.getIsPlayer()){
-                showText("" + unionBase.getHP(), 2, 6);
-                showText("" + empireBase.getHP(), 18, 6);
-            }
-            else{
-                showText("" + empireBase.getHP(), 2, 6);
-                showText("" + unionBase.getHP(), 18, 6);
-            }
+            //if(unionBase.getIsPlayer()){
+            //    showText("" + unionBase.getHP(), 2, 6);
+            //    showText("" + empireBase.getHP(), 18, 6);
+            //}
+            //else{
+            //    showText("" + empireBase.getHP(), 2, 6);
+            //    showText("" + unionBase.getHP(), 18, 6);
+            //}
         }
     }
-
     public int getPlayerCash(){
         return playerCash;
     }
-
     public void setPlayerCash(int playerCash){
         this.playerCash = playerCash;
     }
-
     public int getAICash(){
         return aiCash;
     }
-
     public void setAICash(int aiCash){
         this.aiCash = aiCash;
     }
-    
-    AttackButton attackButton = new AttackButton();
-    //MoveButton moveButton = new MoveButton();
-    UnionRifleman selected = new UnionRifleman();
-    public void attackOrMove(UnionRifleman selected){
+
+
+
+    public void attackOrMove(UnionUnit selected){
         System.out.println("fadhflajhdg");
         this.selected = selected;
         addObject(attackButton, 1, 3);
-        //addObject(moveButton, 1, 5);
+        addObject(moveButton, 1, 5);
     }
-    
+
+
     public void dealDamage(){
+        empireBase.setHP(-200);
         List<EmpireUnit> toDmg = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
         for(int i = 0; i < toDmg.size(); i++){
             (toDmg.get(i)).setHP(-200);
         }
     }
-    
+
     public void nukeDrop(){
         NuclearBomb bomb = new NuclearBomb();
         addObject(bomb, 10, 7);
