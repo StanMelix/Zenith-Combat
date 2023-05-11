@@ -23,7 +23,7 @@ public class Battlefield extends World
         GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
         unionTheme.playLoop();
     }
-    
+
     private void prepare()
     {
         // Initialize/create starting Union Riflemen.
@@ -89,6 +89,7 @@ public class Battlefield extends World
         SpawnNuke nukeButton = new SpawnNuke();
         addObject(nukeButton,17,0);
     }
+
     public void act(){
         if(unionBase.getHP() == 0 || empireBase.getHP() == 0){
             // Ends the game if one of the bases is destroyed.
@@ -117,6 +118,12 @@ public class Battlefield extends World
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(300);
+
+                List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
+                for(int i = 0; i < unionUnits.size(); i++){
+                    unionUnits.get(i).resetB();
+                }
+
                 showText("Player", 1, 2);
                 turnInt = 0;
             }
@@ -137,28 +144,37 @@ public class Battlefield extends World
             //}
         }
     }
+
     public int getPlayerCash(){
         return playerCash;
     }
+
     public void setPlayerCash(int playerCash){
         this.playerCash = playerCash;
     }
+
     public int getAICash(){
         return aiCash;
     }
+
     public void setAICash(int aiCash){
         this.aiCash = aiCash;
     }
 
-
+    public int getTurnInt(){
+        return turnInt;
+    }
 
     public void attackOrMove(UnionUnit selected){
         System.out.println("fadhflajhdg");
         this.selected = selected;
-        addObject(attackButton, 1, 3);
-        addObject(moveButton, 1, 5);
+        if(selected.getHasAttacked() == false){
+            addObject(attackButton, 1, 3);
+        }
+        if(selected.getHasMoved() == false){
+            addObject(moveButton, 1, 5);
+        }
     }
-
 
     public void dealDamage(){
         empireBase.setHP(-200);
@@ -172,11 +188,11 @@ public class Battlefield extends World
         NuclearBomb bomb = new NuclearBomb();
         addObject(bomb, 10, 7);
     }
-    
+
     public void nukeFinished(boolean nf){
         removeObjects(getObjects(NuclearBomb.class));
     }
-    
+
     public void removeDed(){
         List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
         for(int i = 0; i < unionUnits.size(); i++){
@@ -191,7 +207,7 @@ public class Battlefield extends World
             }
         }
     }
-    
+
     public static boolean getGameEnd(){
         return gameEnded;
     }
