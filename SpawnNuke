@@ -1,0 +1,11 @@
+import greenfoot.*;
+
+public class SpawnNuke extends Actor
+{
+    public void act() 
+    {
+        if(Greenfoot.mouseClicked(this)){
+            ((Battlefield)getWorld()).nukeDrop();
+        }
+    }    
+}
