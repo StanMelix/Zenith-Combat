@@ -36,7 +36,7 @@ public class UnionUnit extends Actor
             setLocation(getX(), 11);
         }
 
-        if(Greenfoot.mouseClicked(this)) {
+        if(Greenfoot.mouseClicked(this) && !(Battlefield.getGameEnd())) {
             ((Battlefield)getWorld()).attackOrMove(this);
         } 
         Actor testEnemy = getOneObjectAtOffset(0, 0, EmpireUnit.class);
