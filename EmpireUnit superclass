@@ -5,11 +5,15 @@ public class EmpireUnit extends Actor
     private int HP = 100;
     private int dmg = 10;
     private int cost = 100;
+    private boolean isPlayer = false;
     
     public EmpireUnit(int HP, int dmg, int cost) {
         this.HP = HP;
         this.dmg = dmg;
         this.cost = cost;
+        if(!isPlayer){
+            getImage().mirrorHorizontally();
+        }
     }
     
     public void act()
