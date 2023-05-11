@@ -82,13 +82,14 @@ public class UnionUnit extends Actor
         }
     }
 
-    public void attack() {
+    public void attack(int playerMoney) {
         //battlefield left X bound = 6, right X bound = 14
         //battlefield top Y bound = 2, battlefield bottom Y bound = 11
         for(int x = getX() - 2; x <= getX() + 2; x += 1) {
             for(int y = getY() - 2; y <= getY() + 2; y += 1) {
                 if(getWorld().getObjectsAt(x,y,EmpireUnit.class).size() == 1) {
                     getWorld().addObject(new AttackCell(), x, y);
+                    playerMoney += getDmg();
                 }
             }
         }
