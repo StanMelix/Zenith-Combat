@@ -46,7 +46,7 @@ public class EmpireUnit extends Actor
     }
 
     public void setHP(int HP){
-        this.HP -= HP;
+        this.HP += HP;
     }
 
     public int getDmg(){
