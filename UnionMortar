@@ -1,34 +1,12 @@
 import greenfoot.*;
 
-public class UnionMortar extends Actor{
-    private int dmg = 75;
-    private int cost = 750;
+public class UnionMortar extends UnionTurret{
     private boolean isPlayer = true;
-    /**
-    public void setEnemy(){
-        if(){
-            isEnemy = true;
-        }
-        isPlayer = true;
-    }
-    */
-    public void act(){
-
-    }
-
-    public int getDmg(){
-        return dmg;
-    }
-
-    public void setDmg(int dmg){
-        this.dmg = dmg;
-    }
-
-    public int getCost(){
-        return cost;
+    public UnionMortar() {
+        super(75, 750);
     }
     
-    public boolean getIsPlayer(){
+    public boolean getIsPlayer() {
         return isPlayer;
     }
 }
