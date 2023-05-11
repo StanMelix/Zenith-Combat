@@ -33,8 +33,8 @@ public class EmpireUnit extends Actor
             setLocation(getX(), 11);
         }
 
-        Actor testEnemy = getOneObjectAtOffset(0, 0, UnionRifleman.class);
-        Actor testAlly = getOneObjectAtOffset(0, 0, EmpireRifleman.class);
+        Actor testEnemy = getOneObjectAtOffset(0, 0, UnionUnit.class);
+        Actor testAlly = getOneObjectAtOffset(0, 0, EmpireUnit.class);
         if(testEnemy != null || testAlly != null){
             setLocation(oldX, oldY);
         }
