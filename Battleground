@@ -120,6 +120,7 @@ public class Battlefield extends World
                 showText("Player", 1, 2);
                 turnInt = 0;
             }
+            removeDed();
             //if(timer < 0){
             //    if(turnInt == 0){turnInt++;}
             //    else{turnInt--;}
@@ -174,6 +175,21 @@ public class Battlefield extends World
     
     public void nukeFinished(boolean nf){
         removeObjects(getObjects(NuclearBomb.class));
+    }
+    
+    public void removeDed(){
+        List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
+        for(int i = 0; i < unionUnits.size(); i++){
+            if((unionUnits.get(i)).getHP() <= 0){
+                removeObject(unionUnits.get(i));
+            }
+        }
+        List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
+        for(int i = 0; i < empireUnits.size(); i++){
+            if((empireUnits.get(i)).getHP() <= 0){
+                removeObject(empireUnits.get(i));
+            }
+        }
     }
     
     public static boolean getGameEnd(){
