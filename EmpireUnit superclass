@@ -6,6 +6,8 @@ public class EmpireUnit extends Actor
     private int dmg = 10;
     private int cost = 100;
     private boolean isPlayer = false;
+    private int oldX1 = 0;
+    private int oldY1 = 0;
     
     public EmpireUnit(int HP, int dmg, int cost) {
         this.HP = HP;
@@ -18,6 +20,7 @@ public class EmpireUnit extends Actor
     
     public void act()
     {
+        ((Battlefield)getWorld()).showText("", oldX1, oldY1);
         ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
         int oldX = getX();
         int oldY = getY();
@@ -42,7 +45,8 @@ public class EmpireUnit extends Actor
         if(testEnemy != null || testAlly != null){
             setLocation(oldX, oldY);
         }
-
+        oldX1 = oldX;
+        oldY1 = oldY;
     }
 
     public int getHP(){
