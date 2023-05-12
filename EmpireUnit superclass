@@ -65,17 +65,28 @@ public class EmpireUnit extends Actor
         return cost;
     }
 
-    public void AImove(){
+   public void AImove(Actor a){
         if(!(Battlefield.getGameEnd())){
-            setLocation(getX() - 1, getY());
-            if(Greenfoot.getRandomNumber(100) < 10){
-                turn(90);  
-            }
-            else if(Greenfoot.getRandomNumber(100) > 10){
-                turn(-90);
-            }
+            if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY()){
+            if(a.getX() - getX() < 0){
+                setLocation(getX()-1,getY());
         }
+    }   
+        else{
+            setLocation(getX() + 1, getY());
     }
+    else{
+        if(a.getY()-getY() > 0){
+            setLocation(getX(), getY()+1);
+        }
+        else{
+            setLocation(getX(), getY() - 1);
+        }
+       }
+     }
+
+    }
+    
 
     public boolean isNear(){
         if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
