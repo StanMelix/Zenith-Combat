@@ -90,7 +90,9 @@ public class EmpireUnit extends Actor
      }
 
     }
-    
+    public void AIattack(Actor a){
+        
+    }
 
     public boolean isNear(){
         if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
