@@ -8,7 +8,7 @@ public class EmpireUnit extends Actor
     private boolean isPlayer = false;
     private int oldX1 = 0;
     private int oldY1 = 0;
-    
+
     public EmpireUnit(int HP, int dmg, int cost) {
         this.HP = HP;
         this.dmg = dmg;
@@ -17,7 +17,7 @@ public class EmpireUnit extends Actor
             getImage().mirrorHorizontally();
         }
     }
-    
+
     public void act()
     {
         ((Battlefield)getWorld()).showText("", oldX1, oldY1);
@@ -25,7 +25,7 @@ public class EmpireUnit extends Actor
         int oldX = getX();
         int oldY = getY();
 
-        AImove();
+        AImove(this);
 
         if(getX() < 6){
             setLocation(6, getY());
@@ -69,29 +69,30 @@ public class EmpireUnit extends Actor
         return cost;
     }
 
-  public void AImove(Actor a){
+    public void AImove(Actor a){
         if(!(Battlefield.getGameEnd())){
             if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY())){
                 if(a.getX() - getX() < 0){
                     setLocation(getX()-1,getY());
                 }
-       
+
                 else{
                     setLocation(getX() + 1, getY());
                 }
             }else{
-                    if(a.getY()-getY() > 0){
-                        setLocation(getX(), getY()+1);
-                    }
-                    else{
-                        setLocation(getX(), getY() - 1);
-                    }
-       }
-     }
+                if(a.getY()-getY() > 0){
+                    setLocation(getX(), getY()+1);
+                }
+                else{
+                    setLocation(getX(), getY() - 1);
+                }
+            }
+        }
 
     }
+
     public void AIattack(Actor a){
-        
+
     }
 
     public boolean isNear(){
