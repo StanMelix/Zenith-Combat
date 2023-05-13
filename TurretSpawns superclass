@@ -1,0 +1,12 @@
+import greenfoot.*;
+public class TurretSpawns extends Actor
+{
+    public void act()
+    {
+        
+    }
+    
+    public void spawn(UnionTurret t){
+        ((Battlefield)getWorld()).turretSpawning(t);
+    }
+}
