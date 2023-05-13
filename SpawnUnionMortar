@@ -1,0 +1,10 @@
+import greenfoot.*;
+public class SpawnUnionMortar extends TurretSpawns
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            spawn(new UnionMortar());
+        }
+    }
+}
