@@ -4,7 +4,7 @@ public class UnionTank extends UnionUnit
 {
     public boolean isPlayer = true;
     public UnionTank() {
-        super(300, 25, 3);
+        super(300, 25, 3, 750, new GreenfootSound("CannonFire.mp3"));
     }
     
     public boolean getIsPlayer() {
