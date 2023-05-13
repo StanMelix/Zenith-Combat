@@ -1,0 +1,23 @@
+import greenfoot.*;
+
+public class Instructions0 extends World
+{
+    GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
+    public Instructions0()
+    {    
+        super(21, 14, 60);
+        prepare();
+        unionTheme.playLoop();
+    }
+    
+    private void prepare(){
+        ContinueButton cb = new ContinueButton();
+        addObject(cb, 10, 12);
+    }
+    
+    public void goInstructions(){
+        unionTheme.stop();
+        Instructions1 instructions1 = new Instructions1();
+        Greenfoot.setWorld(instructions1);
+    }
+}
