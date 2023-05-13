@@ -4,18 +4,19 @@ public class AttackCell extends Actor
 {
     public void act() 
     {
-       if(Greenfoot.mouseClicked(this)) {
-           List<Actor> list = getWorld().getObjectsAt(getX(), getY(), Actor.class);
-           EmpireUnit unitToBeAttacked = null;
-           for(Actor a : list) {
-               if(a instanceof EmpireUnit) {
-                   unitToBeAttacked = (EmpireUnit)a;
+        if(Greenfoot.mouseClicked(this)) {
+            List<Actor> list = getWorld().getObjectsAt(getX(), getY(), Actor.class);
+            EmpireUnit unitToBeAttacked = null;
+            for(Actor a : list) {
+                if(a instanceof EmpireUnit) {
+                    unitToBeAttacked = (EmpireUnit)a;
                 }
             }
-           System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
-           unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
-           getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
-       }
+            GreenfootSound attackSound = (((Battlefield)getWorld()).selected).getAttackSound();
+            attackSound.play();
+            System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
+            unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+            getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
+        }
     }    
 }
-
