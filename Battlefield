@@ -129,12 +129,12 @@ public class Battlefield extends World
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(120);
-                
+
                 List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
                 for(int i = 0; i < empireUnits.size(); i++){
                     empireUnits.get(i).AImove(empireUnits.get(i));
                 }
-                
+
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
                     unionUnits.get(i).resetB();
@@ -182,16 +182,32 @@ public class Battlefield extends World
     public int getTurnInt(){
         return turnInt;
     }
-    
+
     public int getNukeCooldown(){
         return nukeCooldown;
     }
-    
+
     public void spawning(UnionUnit u){
         if(!(getGameEnd())){
             for(int y = 2; y < 12; y++){
                 if(getObjectsAt(6,y,Actor.class).size() == 0){
                     addObject(new SpawnCell(u), 6, y);
+                }
+            }
+        }
+    }
+
+    public void turretSpawning(UnionTurret t){
+        if(!(getGameEnd())){
+            for(int y = 3; y < 11; y++){
+                if(getObjectsAt(4,y,UnionTurret.class).size() == 0){
+                    addObject(new SpawnCell(t), 4, y);
+                }
+                if(y == 3 || y == 8){
+                    y++;
+                }
+                else{
+                    y+=2;
                 }
             }
         }
@@ -207,7 +223,7 @@ public class Battlefield extends World
             addObject(moveButton, 1, 5);
         }
     }
-    
+
     public void attackFinished(){
         removeObjects(getObjects(MuzzleFlare.class));
         removeObjects(getObjects(BulletHit.class));
