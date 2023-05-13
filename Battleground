@@ -87,6 +87,16 @@ public class Battlefield extends World
         addObject(readyButton,19,3);
         showText("Player", 1, 2);
         // Create/initialize the shop.
+        SpawnUnionRifleman rifleButton = new SpawnUnionRifleman();
+        addObject(rifleButton,3,0);
+        SpawnUnionMachineGunner MGButton = new SpawnUnionMachineGunner();
+        addObject(MGButton,5,0);
+        SpawnUnionTank tankButton = new SpawnUnionTank();
+        addObject(tankButton,9,0);
+        SpawnUnionMortar mortarButton = new SpawnUnionMortar();
+        addObject(mortarButton,13,0);
+        SpawnUnionRocketArtillery rocketButton = new SpawnUnionRocketArtillery();
+        addObject(rocketButton,15,0);
         SpawnNuke nukeButton = new SpawnNuke();
         addObject(nukeButton,17,0);
     }
@@ -118,8 +128,13 @@ public class Battlefield extends World
             if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
                 showText("Computer", 1, 2);
                 turnInt = 1;
-                Greenfoot.delay(300);
-
+                Greenfoot.delay(120);
+                
+                List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
+                for(int i = 0; i < empireUnits.size(); i++){
+                    empireUnits.get(i).AImove(empireUnits.get(i));
+                }
+                
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
                     unionUnits.get(i).resetB();
@@ -170,6 +185,16 @@ public class Battlefield extends World
     
     public int getNukeCooldown(){
         return nukeCooldown;
+    }
+    
+    public void spawning(UnionUnit u){
+        if(!(getGameEnd())){
+            for(int y = 2; y < 12; y++){
+                if(getObjectsAt(6,y,Actor.class).size() == 0){
+                    addObject(new SpawnCell(u), 6, y);
+                }
+            }
+        }
     }
 
     public void attackOrMove(UnionUnit selected){
