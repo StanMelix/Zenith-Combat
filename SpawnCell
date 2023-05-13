@@ -1,0 +1,17 @@
+import greenfoot.*;
+public class SpawnCell extends Actor
+{
+    UnionUnit u;
+    
+    public SpawnCell(UnionUnit u){
+        this.u = u;
+    }
+    
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            ((Battlefield)getWorld()).addObject(u, getX(), getY());
+            getWorld().removeObjects(getWorld().getObjects(SpawnCell.class));
+        }
+    }
+}
