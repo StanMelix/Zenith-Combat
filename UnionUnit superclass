@@ -5,15 +5,19 @@ public class UnionUnit extends Actor
 {
     private int HP = 100;
     private int dmg = 10;
+    private int range = 2;
     private int cost = 100;
+    private GreenfootSound attackSound = new GreenfootSound("RifleFire.mp3");
     private boolean isPlayer = true;
     private boolean hasAttacked = false;
     private boolean hasMoved = false;
     
-    public UnionUnit(int HP, int dmg, int cost) {
+    public UnionUnit(int HP, int dmg, int range, int cost, GreenfootSound attackSound) {
         this.HP = HP;
         this.dmg = dmg;
+        this.range = range;
         this.cost = cost;
+        this.attackSound = attackSound;
         if(!isPlayer){
             getImage().mirrorHorizontally();
         }
@@ -68,6 +72,10 @@ public class UnionUnit extends Actor
         return cost;
     }
     
+    public GreenfootSound getAttackSound(){
+        return attackSound;
+    }
+    
     public boolean getHasAttacked(){
         return hasAttacked;
     }
@@ -101,8 +109,8 @@ public class UnionUnit extends Actor
     public void attack() {
         //battlefield left X bound = 6, right X bound = 14
         //battlefield top Y bound = 2, battlefield bottom Y bound = 11
-        for(int x = getX() - 2; x <= getX() + 2; x += 1) {
-            for(int y = getY() - 2; y <= getY() + 2; y += 1) {
+        for(int x = getX() - range; x <= getX() + range; x += 1) {
+            for(int y = getY() - range; y <= getY() + range; y += 1) {
                 if(getWorld().getObjectsAt(x,y,EmpireUnit.class).size() == 1) {
                     getWorld().addObject(new AttackCell(), x, y);
                 }
