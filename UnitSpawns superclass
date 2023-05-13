@@ -1,0 +1,12 @@
+import greenfoot.*;
+public class UnitSpawns extends Actor
+{
+    public void act()
+    {
+        
+    }
+    
+    public void spawn(UnionUnit u){
+        ((Battlefield)getWorld()).spawning(u);
+    }
+}
