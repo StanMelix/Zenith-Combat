@@ -1,34 +1,12 @@
 import greenfoot.*;
 
-public class UnionRocketArtillery extends Actor{
-    private int dmg = 50;
-    private int cost = 1000;
+public class UnionRocketArtillery extends UnionTurret{
     private boolean isPlayer = true;
-    /**
-    public void setEnemy(){
-        if(){
-            isEnemy = true;
-        }
-        isPlayer = true;
-    }
-    */
-    public void act(){
-
-    }
-
-    public int getDmg(){
-        return dmg;
-    }
-
-    public void setDmg(int dmg){
-        this.dmg = dmg;
-    }
-
-    public int getCost(){
-        return cost;
+    public UnionRocketArtillery() {
+        super(50, 4, 1000, new GreenfootSound("RocketFire.mp3"));
     }
     
-    public boolean getIsPlayer(){
+    public boolean getIsPlayer() {
         return isPlayer;
     }
 }
