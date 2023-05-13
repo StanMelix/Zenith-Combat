@@ -4,13 +4,17 @@ import java.util.List;
 public class UnionTurret extends Actor
 {
     private int dmg = 10;
+    private int range = 2;
     private int cost = 100;
+    private GreenfootSound attackSound = new GreenfootSound("RifleFire.mp3");
     private boolean isPlayer = true;
     private boolean hasAttacked = false;
     
-    public UnionTurret(int dmg, int cost) {
+    public UnionTurret(int dmg, int range, int cost, GreenfootSound attackSound) {
         this.dmg = dmg;
+        this.range = range;
         this.cost = cost;
+        this.attackSound = attackSound;
         if(!isPlayer){
             getImage().mirrorHorizontally();
         }
