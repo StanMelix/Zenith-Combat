@@ -8,6 +8,7 @@ public class Battlefield extends World
     //private int timer = 100;
     private int turnInt = 0;
     private static boolean gameEnded = false;
+    private int nukeCooldown = 10;
     ReadyButton readyButton = new ReadyButton();
     UnionUnit selected;
     UnionBase unionBase = new UnionBase();
@@ -125,7 +126,9 @@ public class Battlefield extends World
                 }
 
                 showText("Player", 1, 2);
+                showText("Nuke cooldown:" + nukeCooldown, 2, 13);
                 turnInt = 0;
+                nukeCooldown++;
             }
             removeDed();
             //if(timer < 0){
@@ -164,6 +167,10 @@ public class Battlefield extends World
     public int getTurnInt(){
         return turnInt;
     }
+    
+    public int getNukeCooldown(){
+        return nukeCooldown;
+    }
 
     public void attackOrMove(UnionUnit selected){
         System.out.println("fadhflajhdg");
@@ -175,6 +182,11 @@ public class Battlefield extends World
             addObject(moveButton, 1, 5);
         }
     }
+    
+    public void attackFinished(){
+        removeObjects(getObjects(MuzzleFlare.class));
+        removeObjects(getObjects(BulletHit.class));
+    }
 
     public void dealDamage(){
         empireBase.setHP(empireBase.getHP() - 200);
@@ -185,6 +197,7 @@ public class Battlefield extends World
     }
 
     public void nukeDrop(){
+        nukeCooldown = 0;
         NuclearBomb bomb = new NuclearBomb();
         addObject(bomb, 10, 7);
     }
