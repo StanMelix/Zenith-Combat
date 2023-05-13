@@ -1,0 +1,19 @@
+import greenfoot.*;
+
+public class ContinueButton extends Actor
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            if(getWorld() instanceof Instructions0){
+                ((Instructions0)getWorld()).goInstructions();
+            }
+            else if(getWorld() instanceof Instructions1){
+                ((Instructions1)getWorld()).goInstructions();
+            }
+            else if(getWorld() instanceof Instructions2){
+                ((Instructions2)getWorld()).goInstructions();
+            }
+        }
+    }
+}
