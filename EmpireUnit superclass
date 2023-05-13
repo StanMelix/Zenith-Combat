@@ -25,26 +25,6 @@ public class EmpireUnit extends Actor
         int oldX = getX();
         int oldY = getY();
 
-        AImove(this);
-
-        if(getX() < 6){
-            setLocation(6, getY());
-        }
-        if(getX() > 14){
-            setLocation(14, getY());
-        }
-        if(getY() < 2){
-            setLocation(getX(), 2);
-        }
-        if(getY() > 11){
-            setLocation(getX(), 11);
-        }
-
-        Actor testEnemy = getOneObjectAtOffset(0, 0, UnionUnit.class);
-        Actor testAlly = getOneObjectAtOffset(0, 0, EmpireUnit.class);
-        if(testEnemy != null || testAlly != null){
-            setLocation(oldX, oldY);
-        }
         oldX1 = oldX;
         oldY1 = oldY;
     }
@@ -71,24 +51,49 @@ public class EmpireUnit extends Actor
 
     public void AImove(Actor a){
         if(!(Battlefield.getGameEnd())){
+            int oldX = getX();
+            int oldY = getY();
             if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY())){
                 if(a.getX() - getX() < 0){
                     setLocation(getX()-1,getY());
+                    fixLocation();
                 }
 
                 else{
                     setLocation(getX() + 1, getY());
+                    fixLocation();
                 }
             }else{
                 if(a.getY()-getY() > 0){
                     setLocation(getX(), getY()+1);
+                    fixLocation();
                 }
                 else{
                     setLocation(getX(), getY() - 1);
+                    fixLocation();
                 }
             }
+            Actor testEnemy = getOneObjectAtOffset(0, 0, UnionUnit.class);
+            Actor testAlly = getOneObjectAtOffset(0, 0, EmpireUnit.class);
+            if(testEnemy != null || testAlly != null){
+                setLocation(oldX, oldY);
+            }
         }
+    }
 
+    public void fixLocation(){
+        if(getX() < 6){
+            setLocation(6, getY());
+        }
+        if(getX() > 14){
+            setLocation(14, getY());
+        }
+        if(getY() < 2){
+            setLocation(getX(), 2);
+        }
+        if(getY() > 11){
+            setLocation(getX(), 11);
+        }
     }
 
     public void AIattack(Actor a){
