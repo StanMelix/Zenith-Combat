@@ -5,7 +5,7 @@ public class UnionRifleman extends UnionUnit
 {
     public boolean isPlayer = true;
     public UnionRifleman() {
-        super(100, 10, 100);
+        super(100, 10, 2, 100, new GreenfootSound("RifleFire.mp3"));
     }
     
     public boolean getIsPlayer() {
