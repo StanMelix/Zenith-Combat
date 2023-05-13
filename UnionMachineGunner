@@ -4,7 +4,7 @@ public class UnionMachineGunner extends UnionUnit
 {
     public boolean isPlayer = true;
     public UnionMachineGunner() {
-        super(125, 15, 2);
+        super(125, 15, 2, 200, new GreenfootSound("MGFire.mp3"));
     }
     
     public boolean getIsPlayer() {
