@@ -14,20 +14,29 @@ public class AttackCell extends Actor
             }
             ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
                 (((Battlefield)getWorld()).selected).getY());
-            if((((Battlefield)getWorld()).selected instanceof UnionTank)){
+            if(((Battlefield)getWorld()).selected instanceof UnionTank ||
+            ((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
                 ((Battlefield)getWorld()).addObject(new ShellHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
             }
             else{
                 ((Battlefield)getWorld()).addObject(new BulletHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
             }
             GreenfootSound attackSound = (((Battlefield)getWorld()).selected).getAttackSound();
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                attackSound = new GreenfootSound("RocketFire.mp3");
+            }
             attackSound.play();
             Greenfoot.delay(30);
             getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
             getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
             System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
-            unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                unitToBeAttacked.setHP(unitToBeAttacked.getHP() - 50);
+            }
+            else{
+                unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+            }
             ((Battlefield)getWorld()).attackFinished();
             getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
         }
