@@ -11,6 +11,7 @@ public class Battlefield extends World
     private int nukeCooldown = 10;
     ReadyButton readyButton = new ReadyButton();
     UnionUnit selected;
+    UnionTurret selectedT;
     UnionBase unionBase = new UnionBase();
     EmpireBase empireBase = new EmpireBase();
     AttackButton attackButton = new AttackButton();
@@ -91,8 +92,12 @@ public class Battlefield extends World
         addObject(rifleButton,3,0);
         SpawnUnionMachineGunner MGButton = new SpawnUnionMachineGunner();
         addObject(MGButton,5,0);
+        SpawnUnionOfficer officerButton = new SpawnUnionOfficer();
+        addObject(officerButton,7,0);
         SpawnUnionTank tankButton = new SpawnUnionTank();
         addObject(tankButton,9,0);
+        SpawnUnionHeli heliButton = new SpawnUnionHeli();
+        addObject(heliButton,11,0);
         SpawnUnionMortar mortarButton = new SpawnUnionMortar();
         addObject(mortarButton,13,0);
         SpawnUnionRocketArtillery rocketButton = new SpawnUnionRocketArtillery();
@@ -138,6 +143,11 @@ public class Battlefield extends World
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
                     unionUnits.get(i).resetB();
+                }
+
+                List<UnionTurret> unionTurrets = new ArrayList<UnionTurret>(getObjects(UnionTurret.class));
+                for(int i = 0; i < unionTurrets.size(); i++){
+                    unionTurrets.get(i).reset();
                 }
 
                 showText("Player", 1, 2);
