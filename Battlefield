@@ -261,12 +261,14 @@ public class Battlefield extends World
         List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
         for(int i = 0; i < unionUnits.size(); i++){
             if((unionUnits.get(i)).getHP() <= 0){
+                showText("", unionUnits.get(i).getX(), unionUnits.get(i).getY());
                 removeObject(unionUnits.get(i));
             }
         }
         List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
         for(int i = 0; i < empireUnits.size(); i++){
             if((empireUnits.get(i)).getHP() <= 0){
+                showText("", empireUnits.get(i).getX(), empireUnits.get(i).getY());
                 removeObject(empireUnits.get(i));
             }
         }
