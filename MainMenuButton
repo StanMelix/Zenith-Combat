@@ -1,0 +1,16 @@
+import greenfoot.*;
+
+public class MainMenuButton extends Actor
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            if(getWorld() instanceof EmpireWinVsUnion){
+                ((EmpireWinVsUnion)getWorld()).goMain();
+            }
+            else if(getWorld() instanceof UnionWinVsEmpire){
+                ((UnionWinVsEmpire)getWorld()).goMain();
+            }
+        }
+    }
+}
