@@ -1,0 +1,13 @@
+import greenfoot.*;
+
+public class EmpireHelicopter extends EmpireUnit
+{
+    public boolean isPlayer = false;
+    public EmpireHelicopter() {
+        super(150, 15, 500);
+    }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
+}
