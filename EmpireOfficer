@@ -1,0 +1,13 @@
+import greenfoot.*;
+
+public class EmpireOfficer extends EmpireUnit
+{
+    public boolean isPlayer = false;
+    public EmpireOfficer() {
+        super(75, 10, 400);
+    }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
+}
