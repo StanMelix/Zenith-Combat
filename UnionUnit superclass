@@ -11,7 +11,7 @@ public class UnionUnit extends Actor
     private boolean isPlayer = true;
     private boolean hasAttacked = false;
     private boolean hasMoved = false;
-    
+
     public UnionUnit(int HP, int dmg, int range, int cost, GreenfootSound attackSound) {
         this.HP = HP;
         this.dmg = dmg;
@@ -22,7 +22,7 @@ public class UnionUnit extends Actor
             getImage().mirrorHorizontally();
         }
     }
-    
+
     public void act(){
         ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
         MouseInfo mi = Greenfoot.getMouseInfo();
@@ -50,6 +50,8 @@ public class UnionUnit extends Actor
         if(testEnemy != null || testAlly != null){
             setLocation(oldX, oldY);
         }
+
+        //officerBuff();
     }
 
     public int getHP(){
@@ -68,22 +70,33 @@ public class UnionUnit extends Actor
         this.dmg = dmg;
     }
 
+    //public void officerBuff(){
+    //    // Officer damage buff
+    //    for(int x = getX() - 1; x <= getX() + 1; x++){
+    //        for(int y = getY() - 1; y <= getY() + 1; y++){
+    //            if(getWorld().getObjectsAt(x,y,UnionOfficer.class).size() == 1){
+    //                dmg += dmg/4;
+    //            }
+    //        }
+    //    }
+    //}
+
     public int getCost(){
         return cost;
     }
-    
+
     public GreenfootSound getAttackSound(){
         return attackSound;
     }
-    
+
     public boolean getHasAttacked(){
         return hasAttacked;
     }
-    
+
     public boolean getHasMoved(){
         return hasMoved;
     }
-    
+
     public void resetB(){
         hasAttacked = false;
         hasMoved = false;
@@ -93,18 +106,30 @@ public class UnionUnit extends Actor
         if(!(Battlefield.getGameEnd())){
             //battlefield left X bound = 6, right X bound = 14
             //battlefield top Y bound = 2, battlefield bottom Y bound = 11
-            for(int x = getX() - 1; x <= getX() + 1; x += 1) {
-                for(int y = getY() - 1; y <= getY() + 1; y += 1) {
-                    if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
-                        getWorld().addObject(new MoveCell(), x, y);
-                        System.out.println("Created movecell at "+x+" "+y);
+            if(this instanceof UnionOfficer){
+                for(int x = getX() - 2; x <= getX() + 2; x += 1) {
+                    for(int y = getY() - 2; y <= getY() + 2; y += 1) {
+                        if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
+                            getWorld().addObject(new MoveCell(), x, y);
+                            System.out.println("Created movecell at "+x+" "+y);
+                        }
+                    }
+                }
+            }
+            else{
+                for(int x = getX() - 1; x <= getX() + 1; x += 1) {
+                    for(int y = getY() - 1; y <= getY() + 1; y += 1) {
+                        if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
+                            getWorld().addObject(new MoveCell(), x, y);
+                            System.out.println("Created movecell at "+x+" "+y);
+                        }
                     }
                 }
             }
             hasMoved = true;
         }
     }
-    
+
     //public void attack(int playerMoney){
     public void attack() {
         //battlefield left X bound = 6, right X bound = 14
