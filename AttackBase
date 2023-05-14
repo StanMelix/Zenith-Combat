@@ -1,0 +1,37 @@
+import greenfoot.*;
+public class AttackBase extends Actor
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            EmpireBase b = ((Battlefield)getWorld()).empireBase;
+            ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
+                (((Battlefield)getWorld()).selected).getY());
+            if(((Battlefield)getWorld()).selected instanceof UnionTank){
+                ((Battlefield)getWorld()).addObject(new ShellHit(), b.getX(), b.getY());
+            }
+            else{
+                ((Battlefield)getWorld()).addObject(new BulletHit(), b.getX(), b.getY());
+            }
+            GreenfootSound attackSound = (((Battlefield)getWorld()).selected).getAttackSound();
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter){
+                attackSound = new GreenfootSound("RocketFire.mp3");
+            }
+            attackSound.play();
+            Greenfoot.delay(30);
+            getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
+            getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
+            getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter){
+                b.hitByShell();
+                b.setHP(b.getHP() - 30);
+            }
+            else{
+                b.setHP(b.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+            }
+            ((Battlefield)getWorld()).attackFinished();
+            getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
+            getWorld().removeObjects(getWorld().getObjects(AttackBase.class));
+        }
+    }
+}
