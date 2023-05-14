@@ -134,6 +134,9 @@ public class UnionUnit extends Actor
     public void attack() {
         //battlefield left X bound = 6, right X bound = 14
         //battlefield top Y bound = 2, battlefield bottom Y bound = 11
+        if(getX() >= ((Battlefield)getWorld()).empireBase.getX() - range - 1){
+            getWorld().addObject(new AttackBase(), 16, 6);
+        }
         for(int x = getX() - range; x <= getX() + range; x += 1) {
             for(int y = getY() - range; y <= getY() + range; y += 1) {
                 if(getWorld().getObjectsAt(x,y,EmpireUnit.class).size() == 1) {
