@@ -9,7 +9,7 @@ public class UnionTurret extends Actor
     private GreenfootSound attackSound = new GreenfootSound("RifleFire.mp3");
     private boolean isPlayer = true;
     private boolean hasAttacked = false;
-    
+
     public UnionTurret(int dmg, int range, int cost, GreenfootSound attackSound) {
         this.dmg = dmg;
         this.range = range;
@@ -19,9 +19,11 @@ public class UnionTurret extends Actor
             getImage().mirrorHorizontally();
         }
     }
-    
-    public void act(){
 
+    public void act(){
+        if(Greenfoot.mouseClicked(this) && !(Battlefield.getGameEnd()) && ((Battlefield)getWorld()).getTurnInt() == 0) {
+            attack();
+        } 
     }
 
     public int getDmg(){
@@ -35,8 +37,36 @@ public class UnionTurret extends Actor
     public int getCost(){
         return cost;
     }
-    
+
+    public GreenfootSound getAttackSound(){
+        return attackSound;
+    }
+
     public boolean getIsPlayer(){
         return isPlayer;
+    }
+
+    public boolean getHasAttacked(){
+        return hasAttacked;
+    }
+
+    public void reset(){
+        hasAttacked = false;
+    }
+
+    //public void attack(int playerMoney){
+    public void attack() {
+        //battlefield left X bound = 6, right X bound = 14
+        //battlefield top Y bound = 2, battlefield bottom Y bound = 11
+        if(!(hasAttacked)){
+            for(int x = getX() - range + 1; x <= getX() + range + 1; x += 1) {
+                for(int y = 2; y <= 11; y += 1) {
+                    if(getWorld().getObjectsAt(x,y,EmpireUnit.class).size() == 1) {
+                        getWorld().addObject(new AttackCellT(this), x, y);
+                    }
+                }
+            }
+        }
+        hasAttacked = true;
     }
 }
