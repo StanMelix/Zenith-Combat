@@ -32,6 +32,7 @@ public class AttackCell extends Actor
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
             System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
             if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                unitToBeAttacked.hitByShell();
                 unitToBeAttacked.setHP(unitToBeAttacked.getHP() - 50);
             }
             else{
