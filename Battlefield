@@ -16,13 +16,13 @@ public class Battlefield extends World
     EmpireBase empireBase = new EmpireBase();
     AttackButton attackButton = new AttackButton();
     MoveButton moveButton = new MoveButton();
+    GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
     public Battlefield()
     {    
         super(21, 14, 60); 
         setBackground("Battlefield.png");
         prepare();
         showText("" + playerCash, 1, 1);
-        GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
         unionTheme.playLoop();
     }
 
@@ -109,12 +109,16 @@ public class Battlefield extends World
     public void act(){
         if(unionBase.getHP() == 0 || empireBase.getHP() == 0){
             // Ends the game if one of the bases is destroyed.
+            gameEnded = true;
+            unionTheme.stop();
             if(unionBase.getIsPlayer()){
                 if(unionBase.getHP() == 0){
-                    showText("Empire Victory", 1, 1);
+                    EmpireWinVsUnion b = new EmpireWinVsUnion();
+                    Greenfoot.setWorld(b);
                 }
                 else if(empireBase.getHP() == 0){
-                    showText("Union Victory", 1, 1);
+                    UnionWinVsEmpire b = new UnionWinVsEmpire();
+                    Greenfoot.setWorld(b);
                 }
             }
             else{
@@ -125,7 +129,6 @@ public class Battlefield extends World
                     showText("Empire Victory", 1, 1);
                 }
             }
-            gameEnded = true;
         }
         else{
             // Progresses the game's turns.
