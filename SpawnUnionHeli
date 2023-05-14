@@ -1,0 +1,10 @@
+import greenfoot.*;
+public class SpawnUnionHeli extends UnitSpawns
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            spawn(new UnionHelicopter());
+        }
+    }
+}
