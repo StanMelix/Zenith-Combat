@@ -1,0 +1,13 @@
+import greenfoot.*;
+
+public class UnionHelicopter extends UnionUnit
+{
+    public boolean isPlayer = true;
+    public UnionHelicopter() {
+        super(150, 15, 2, 500, new GreenfootSound("MGFire.mp3"));
+    }
+    
+    public boolean getIsPlayer() {
+        return isPlayer;
+    }
+}
