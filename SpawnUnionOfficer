@@ -1,0 +1,10 @@
+import greenfoot.*;
+public class SpawnUnionOfficer extends UnitSpawns
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            spawn(new UnionOfficer());
+        }
+    }
+}
