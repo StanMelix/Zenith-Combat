@@ -24,4 +24,9 @@ public class EmpireBase extends Actor
     public void setPlayer(boolean isPlayer){
         this.isPlayer = isPlayer;
     }
+    
+    public void hitByShell(){
+        GreenfootSound boom = new GreenfootSound("Boom.mp3");
+        boom.play();
+    }
 }
