@@ -1,0 +1,35 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+public class AttackCellT extends Actor
+{
+    private UnionTurret t;
+    
+    public AttackCellT(UnionTurret t){
+        this.t = t;
+    }
+    
+    public void act() 
+    {
+        if(Greenfoot.mouseClicked(this)) {
+            List<Actor> list = getWorld().getObjectsAt(getX(), getY(), Actor.class);
+            EmpireUnit unitToBeAttacked = null;
+            for(Actor a : list) {
+                if(a instanceof EmpireUnit) {
+                    unitToBeAttacked = (EmpireUnit)a;
+                }
+            }
+            ((Battlefield)getWorld()).addObject(new ShellHit(), t.getX(), t.getY());
+            ((Battlefield)getWorld()).addObject(new BulletHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
+            GreenfootSound attackSound = t.getAttackSound();
+            attackSound.play();
+            Greenfoot.delay(30);
+            getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
+            getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
+            unitToBeAttacked.hitByShell();
+            System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
+            unitToBeAttacked.setHP(unitToBeAttacked.getHP() - t.getDmg());
+            ((Battlefield)getWorld()).attackFinished();
+            getWorld().removeObjects(getWorld().getObjects(AttackCellT.class));
+        }
+    }    
+}
