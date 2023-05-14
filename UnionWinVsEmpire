@@ -1,0 +1,23 @@
+import greenfoot.*;
+
+public class UnionWinVsEmpire extends World
+{
+    GreenfootSound unionVictory = new GreenfootSound("UnionVictory.mp3");
+    public UnionWinVsEmpire()
+    {    
+        super(21, 14, 60);
+        prepare();
+        unionVictory.playLoop();
+    }
+    
+    private void prepare(){
+        MainMenuButton mmb = new MainMenuButton();
+        addObject(mmb, 10, 12);
+    }
+    
+    public void goMain(){
+        unionVictory.stop();
+        MainMenu mainMenu = new MainMenu();
+        Greenfoot.setWorld(mainMenu);
+    }
+}
