@@ -112,4 +112,9 @@ public class EmpireUnit extends Actor
     public double getDistance(Actor a){
         return Math.sqrt(Math.abs(a.getX()-getX())^2+Math.abs(a.getY()-getY())^2);
     }
+    
+    public void hitByShell(){
+        GreenfootSound boom = new GreenfootSound("Boom.mp3");
+        boom.play();
+    }
 }
