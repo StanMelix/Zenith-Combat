@@ -1,0 +1,18 @@
+import greenfoot.*;
+public class CashDisplay extends Actor {
+    public CashDisplay() {
+        updateImage();
+    }
+    public void act() {
+        updateImage();
+    }    
+    public void updateImage() {
+        int cash = 0;
+        if(getWorld() instanceof Battlefield) {
+            Battlefield b = (Battlefield)getWorld();
+            cash = b.getPlayerCash();
+        }
+        GreenfootImage image = new GreenfootImage("Cash: "+cash, 40, new Color(0,0,0), new Color(0,0,0,0));
+        setImage(image);
+    }
+}
