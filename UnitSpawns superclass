@@ -3,10 +3,18 @@ public class UnitSpawns extends Actor
 {
     public void act()
     {
-        
+
     }
-    
+
     public void spawn(UnionUnit u){
-        ((Battlefield)getWorld()).spawning(u);
+        if(getWorld() instanceof Battlefield) {
+            Battlefield b = (Battlefield)getWorld();
+            if(b.getPlayerCash() >= u.getCost()){
+                ((Battlefield)getWorld()).spawning(u);
+                int lostCash = b.getPlayerCash() - u.getCost();
+                b.setPlayerCash(lostCash);
+                System.out.println(b.getPlayerCash());
+            }
+        }
     }
 }
