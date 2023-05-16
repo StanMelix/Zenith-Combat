@@ -39,6 +39,7 @@ public class AttackCell extends Actor
                 unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
             }
             ((Battlefield)getWorld()).attackFinished();
+            getWorld().removeObjects(getWorld().getObjects(AttackBase.class));
             getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
         }
     }    
