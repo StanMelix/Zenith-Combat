@@ -5,9 +5,15 @@ public class AttackBase extends Actor
     {
         if(Greenfoot.mouseClicked(this)){
             EmpireBase b = ((Battlefield)getWorld()).empireBase;
-            ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter){
+                ((Battlefield)getWorld()).addObject(new RocketFlare(), (((Battlefield)getWorld()).selected).getX(),
                 (((Battlefield)getWorld()).selected).getY());
-            if(((Battlefield)getWorld()).selected instanceof UnionTank){
+            }
+            else{
+                ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
+                (((Battlefield)getWorld()).selected).getY());
+            }
+            if(((Battlefield)getWorld()).selected instanceof UnionTank || ((Battlefield)getWorld()).selected instanceof UnionHelicopter){
                 ((Battlefield)getWorld()).addObject(new ShellHit(), b.getX(), b.getY());
             }
             else{
@@ -19,6 +25,7 @@ public class AttackBase extends Actor
             }
             attackSound.play();
             Greenfoot.delay(30);
+            getWorld().removeObjects(getWorld().getObjects(RocketFlare.class));
             getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
             getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
