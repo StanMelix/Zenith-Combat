@@ -18,11 +18,20 @@ public class AttackCellT extends Actor
                     unitToBeAttacked = (EmpireUnit)a;
                 }
             }
-            ((Battlefield)getWorld()).addObject(new ShellHit(), t.getX(), t.getY());
+            if(t instanceof UnionRocketArtillery){
+                ((Battlefield)getWorld()).addObject(new RocketFlare(), t.getX() + 1, t.getY() - 1);
+            }
+            else{
+                ((Battlefield)getWorld()).addObject(new MuzzleFlare(), t.getX(),
+                t.getY());
+            }
+            ((Battlefield)getWorld()).addObject(new ShellHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
             ((Battlefield)getWorld()).addObject(new BulletHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
             GreenfootSound attackSound = t.getAttackSound();
             attackSound.play();
             Greenfoot.delay(30);
+            getWorld().removeObjects(getWorld().getObjects(RocketFlare.class));
+            getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
             getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
             unitToBeAttacked.hitByShell();
