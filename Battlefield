@@ -16,14 +16,14 @@ public class Battlefield extends World
     EmpireBase empireBase = new EmpireBase();
     AttackButton attackButton = new AttackButton();
     MoveButton moveButton = new MoveButton();
-    GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
+    //GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
     public Battlefield()
     {    
         super(21, 14, 60); 
         setBackground("Battlefield.png");
         prepare();
         showText("" + playerCash, 1, 1);
-        unionTheme.playLoop();
+        //unionTheme.playLoop();
     }
 
     private void prepare()
@@ -110,7 +110,7 @@ public class Battlefield extends World
         if(unionBase.getHP() == 0 || empireBase.getHP() == 0){
             // Ends the game if one of the bases is destroyed.
             gameEnded = true;
-            unionTheme.stop();
+            //unionTheme.stop();
             if(unionBase.getIsPlayer()){
                 if(unionBase.getHP() == 0){
                     EmpireWinVsUnion b = new EmpireWinVsUnion();
@@ -134,23 +134,21 @@ public class Battlefield extends World
             // Progresses the game's turns.
             //timer--;
             if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
-                this.removeObject(moveButton);
-                this.removeObject(attackButton);
-                this.removeObjects(this.getObjects(AttackCell.class));
-                this.removeObjects(this.getObjects(AttackCellT.class));
-                this.removeObjects(this.getObjects(MoveCell.class));
-                this.removeObjects(this.getObjects(AttackBase.class));
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(120);
-                List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
-                for(int i = 0; i < empireUnits.size(); i++){
-                    empireUnits.get(i).AImove(empireUnits.get(i));
-                }
-
+                
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
                     unionUnits.get(i).resetB();
+                }
+
+                List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
+                for(int i = 0; i < empireUnits.size(); i++){
+                    for(int j =0; j < unionUnits.size(); j++){
+                        empireUnits.get(i).AImove(unionUnits.get(j));
+                    }
+                    
                 }
 
                 List<UnionTurret> unionTurrets = new ArrayList<UnionTurret>(getObjects(UnionTurret.class));
