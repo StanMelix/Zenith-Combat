@@ -22,7 +22,8 @@ public class Battlefield extends World
         super(21, 14, 60); 
         setBackground("Battlefield.png");
         prepare();
-        showText("" + playerCash, 1, 1);
+        addObject(new CashDisplay(), 1, 1);
+        //showText("" + playerCash, 1, 1);
         //unionTheme.playLoop();
     }
 
