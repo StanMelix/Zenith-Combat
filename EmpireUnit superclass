@@ -1,18 +1,20 @@
 import greenfoot.*;
-
+import java.util.*;
 public class EmpireUnit extends Actor
 {
     private int HP = 100;
     private int dmg = 10;
     private int cost = 100;
+    private int range = 2;
     private boolean isPlayer = false;
     private int oldX1 = 0;
     private int oldY1 = 0;
 
-    public EmpireUnit(int HP, int dmg, int cost) {
+    public EmpireUnit(int HP, int dmg, int cost, int range) {
         this.HP = HP;
         this.dmg = dmg;
         this.cost = cost;
+        this.range = range;
         if(!isPlayer){
             getImage().mirrorHorizontally();
         }
@@ -48,12 +50,18 @@ public class EmpireUnit extends Actor
     public int getCost(){
         return cost;
     }
+    public int getRange(){
+        return range;
+    }
 
     public void AImove(Actor a){
         if(!(Battlefield.getGameEnd())){
             int oldX = getX();
             int oldY = getY();
-            if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY())){
+            if(getX()-a.getX() <= getRange()){
+                AIattack();
+            }
+            else if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY())){
                 if(a.getX() - getX() < 0){
                     setLocation(getX()-1,getY());
                     fixLocation();
@@ -79,6 +87,43 @@ public class EmpireUnit extends Actor
                 setLocation(oldX, oldY);
             }
         }
+    }
+    public void AIattack(){
+            List<Actor> list = getWorld().getObjectsAt(getX(), getY(), Actor.class);
+            EmpireUnit unitToBeAttacked = null;
+            for(Actor a : list) {
+                if(a instanceof EmpireUnit) {
+                    unitToBeAttacked = (EmpireUnit)a;
+                }
+            }
+            ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
+                (((Battlefield)getWorld()).selected).getY());
+            if(((Battlefield)getWorld()).selected instanceof UnionTank ||
+            ((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                ((Battlefield)getWorld()).addObject(new ShellHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
+            }
+            else{
+                ((Battlefield)getWorld()).addObject(new BulletHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
+            }
+            GreenfootSound attackSound = (((Battlefield)getWorld()).selected).getAttackSound();
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                attackSound = new GreenfootSound("RocketFire.mp3");
+            }
+            attackSound.play();
+            Greenfoot.delay(30);
+            getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
+            getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
+            getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
+            System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
+            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
+                unitToBeAttacked.hitByShell();
+                unitToBeAttacked.setHP(unitToBeAttacked.getHP() - 50);
+            }
+            else{
+                unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+            }
+            ((Battlefield)getWorld()).attackFinished();
+            getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
     }
 
     public void fixLocation(){
