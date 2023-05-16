@@ -134,10 +134,15 @@ public class Battlefield extends World
             // Progresses the game's turns.
             //timer--;
             if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
+                this.removeObject(moveButton);
+                this.removeObject(attackButton);
+                this.removeObjects(this.getObjects(AttackCell.class));
+                this.removeObjects(this.getObjects(AttackCellT.class));
+                this.removeObjects(this.getObjects(MoveCell.class));
+                this.removeObjects(this.getObjects(AttackBase.class));
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(120);
-
                 List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
                 for(int i = 0; i < empireUnits.size(); i++){
                     empireUnits.get(i).AImove(empireUnits.get(i));
