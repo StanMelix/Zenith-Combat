@@ -252,11 +252,13 @@ public class Battlefield extends World
         removeObjects(getObjects(BulletHit.class));
     }
 
-    public void dealDamage(){
+      public void dealDamage(){
         empireBase.setHP(empireBase.getHP() - 200);
         List<EmpireUnit> toDmg = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
         for(int i = 0; i < toDmg.size(); i++){
-            (toDmg.get(i)).setHP((toDmg.get(i)).getHP() - 200);
+            (toDmg.get(i)).setHP((toDmg.get(i)).getHP() - 200);           
+            int newCash = getPlayerCash() + 10;
+            setPlayerCash(newCash);            
         }
     }
 
