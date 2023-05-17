@@ -5,7 +5,16 @@ public class SpawnNuke extends Actor
     public void act() 
     {
         if(Greenfoot.mouseClicked(this)){
-            ((Battlefield)getWorld()).nukeDrop();
+            
+            if(getWorld() instanceof Battlefield) {
+                Battlefield b = (Battlefield)getWorld();
+                if(b.getPlayerCash() >= 4000){
+                    ((Battlefield)getWorld()).nukeDrop();
+                    int lostCash = b.getPlayerCash() - 4000;
+                    b.setPlayerCash(lostCash);
+                    System.out.println(b.getPlayerCash());
+            }
+        }
         }
     }    
 }
