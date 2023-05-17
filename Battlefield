@@ -16,7 +16,7 @@ public class Battlefield extends World
     EmpireBase empireBase = new EmpireBase();
     AttackButton attackButton = new AttackButton();
     MoveButton moveButton = new MoveButton();
-    //GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
+    GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
     public Battlefield()
     {    
         super(21, 14, 60); 
@@ -24,7 +24,7 @@ public class Battlefield extends World
         prepare();
         addObject(new CashDisplay(), 1, 1);
         //showText("" + playerCash, 1, 1);
-        //unionTheme.playLoop();
+        unionTheme.playLoop();
     }
 
     private void prepare()
