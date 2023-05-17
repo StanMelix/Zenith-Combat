@@ -38,6 +38,11 @@ public class AttackCellT extends Actor
             unitToBeAttacked.hitByShell();
             System.out.println("UNIT TO BE ATTACKED: "+unitToBeAttacked);
             unitToBeAttacked.setHP(unitToBeAttacked.getHP() - t.getDmg());
+            if(getWorld() instanceof Battlefield){
+                    Battlefield b = (Battlefield)getWorld();
+                    int newCash = b.getPlayerCash() + 10;
+                    b.setPlayerCash(newCash);
+                }
             if(t instanceof UnionRocketArtillery){
                 List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getWorld().getObjects(EmpireUnit.class));
                 for(int i = 0; i < empireUnits.size(); i++){
@@ -45,6 +50,11 @@ public class AttackCellT extends Actor
                         for(int y = unitToBeAttacked.getY() - 1; y <= unitToBeAttacked.getY() + 1; y += 1) {
                             if((empireUnits.get(i)).getX() == x && (empireUnits.get(i)).getY() == y){
                                 empireUnits.get(i).setHP(empireUnits.get(i).getHP() - 15);
+                                if(getWorld() instanceof Battlefield){
+                                    Battlefield b = (Battlefield)getWorld();
+                                    int newCash = b.getPlayerCash() + 10;
+                                    b.setPlayerCash(newCash);
+                                }
                             }
                         }
                     }
