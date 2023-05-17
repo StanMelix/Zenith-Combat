@@ -7,6 +7,14 @@ public class TurretSpawns extends Actor
     }
     
     public void spawn(UnionTurret t){
-        ((Battlefield)getWorld()).turretSpawning(t);
+        if(getWorld() instanceof Battlefield) {
+            Battlefield b = (Battlefield)getWorld();
+            if(b.getPlayerCash() >= t.getCost()){
+                ((Battlefield)getWorld()).turretSpawning(t);
+                int lostCash = b.getPlayerCash() - t.getCost();
+                b.setPlayerCash(lostCash);
+                System.out.println(b.getPlayerCash());
+            }
+        }
     }
 }
