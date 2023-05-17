@@ -41,9 +41,19 @@ public class AttackCell extends Actor
             if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
                 unitToBeAttacked.hitByShell();
                 unitToBeAttacked.setHP(unitToBeAttacked.getHP() - 50);
+                if(getWorld() instanceof Battlefield){
+                    Battlefield b = (Battlefield)getWorld();
+                    int newCash = b.getPlayerCash() + 50;
+                    b.setPlayerCash(newCash);
+                }
             }
             else{
                 unitToBeAttacked.setHP(unitToBeAttacked.getHP() - ((Battlefield)getWorld()).selected.getDmg());
+                if(getWorld() instanceof Battlefield){
+                    Battlefield b = (Battlefield)getWorld();
+                    int newCash = b.getPlayerCash() + 10;
+                    b.setPlayerCash(newCash);
+                }
             }
             ((Battlefield)getWorld()).attackFinished();
             getWorld().removeObjects(getWorld().getObjects(AttackBase.class));
