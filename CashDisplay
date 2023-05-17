@@ -12,7 +12,7 @@ public class CashDisplay extends Actor {
             Battlefield b = (Battlefield)getWorld();
             cash = b.getPlayerCash();
         }
-        GreenfootImage image = new GreenfootImage("Cash: "+cash, 40, new Color(0,0,0), new Color(0,0,0,0));
+        GreenfootImage image = new GreenfootImage(""+cash, 40, new Color(0,0,0), new Color(0,0,0,0));
         setImage(image);
     }
 }
