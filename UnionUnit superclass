@@ -11,6 +11,7 @@ public class UnionUnit extends Actor
     private boolean isPlayer = true;
     private boolean hasAttacked = false;
     private boolean hasMoved = false;
+    private boolean canAttack = false;
 
     public UnionUnit(int HP, int dmg, int range, int cost, GreenfootSound attackSound) {
         this.HP = HP;
@@ -141,9 +142,10 @@ public class UnionUnit extends Actor
             for(int y = getY() - range; y <= getY() + range; y += 1) {
                 if(getWorld().getObjectsAt(x,y,EmpireUnit.class).size() == 1) {
                     getWorld().addObject(new AttackCell(), x, y);
+                    hasAttacked = true;
                 }
             }
         }
-        hasAttacked = true;
+        
     }
 }
