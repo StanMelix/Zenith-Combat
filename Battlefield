@@ -239,6 +239,12 @@ public class Battlefield extends World
         if(selected.getHasMoved() == false){
             addObject(moveButton, 1, 5);
         }
+        if(selected.getHasMoved() == true) {
+            removeObjects(getObjects(MoveButton.class));
+        }
+        if(selected.getHasAttacked() == true) {
+            removeObjects(getObjects(MoveButton.class));
+        }
     }
 
     public void attackFinished(){
