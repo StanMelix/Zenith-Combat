@@ -1,0 +1,27 @@
+// visuals/audio
+                if(this instanceof EmpireHelicopter && a instanceof UnionTank){
+                    ((Battlefield)getWorld()).addObject(new RocketFlare(), getX(), getY());
+                }
+                else{
+                    MuzzleFlare m = new MuzzleFlare();
+                    m.getImage().mirrorHorizontally();
+                    ((Battlefield)getWorld()).addObject(m, getX(), getY());
+                }
+                if(this instanceof EmpireTank || this instanceof EmpireHelicopter && a instanceof UnionTank){
+                    ((Battlefield)getWorld()).addObject(new ShellHit(), a.getX(), a.getY());
+                }
+                else{
+                    ((Battlefield)getWorld()).addObject(new BulletHit(), a.getX(), a.getY());
+                }
+                if(this instanceof EmpireHelicopter && a instanceof UnionTank){
+                    attackSound = new GreenfootSound("RocketFire.mp3");
+                }
+                attackSound.play();
+                Greenfoot.delay(30);
+                getWorld().removeObjects(getWorld().getObjects(RocketFlare.class));
+                getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
+                getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
+                getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
+                if(this instanceof EmpireHelicopter && a instanceof UnionTank){
+                    attackSound = new GreenfootSound("MGFire.mp3");
+                }
