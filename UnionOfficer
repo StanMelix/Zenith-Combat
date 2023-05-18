@@ -4,7 +4,7 @@ public class UnionOfficer extends UnionUnit
 {
     public boolean isPlayer = true;
     public UnionOfficer() {
-        super(75, 10, 1, 400, new GreenfootSound("PistolFire.mp3"));
+        super(75, 30, 2, 400, new GreenfootSound("PistolFire.mp3"));
     }
     
     public boolean getIsPlayer() {
