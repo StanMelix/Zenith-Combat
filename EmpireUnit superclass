@@ -53,23 +53,41 @@ public class EmpireUnit extends Actor
     public int getRange(){
         return range;
     }
-
-   public void AImove(UnionUnit a){
+    
+    public void AImove() { // UnionUnit a){
+        List<UnionUnit> list = getWorld().getObjects(UnionUnit.class);
+        double shortestDistance = 99999;
+        int index = -1;
+        for(int i=0; i<list.size(); i++) {
+            double distance = getDistance(list.get(i));
+            if(distance < shortestDistance) {
+                shortestDistance = distance;
+                index = i;
+            }
+        }
+        if(index == -1) {
+            return; // IF NO UNION UNITS, DO NOTHING
+        }
+        UnionUnit closest = list.get(index);
+        System.out.println("I AM "+this+" at "+ getX() + " " +getY());
+        System.out.println(closest + " " + closest.getX() + " " + closest.getY() + " -- distance was : "+shortestDistance);
         if(!(Battlefield.getGameEnd())){
             int oldX = getX();
             int oldY = getY();
-            if(getX()-a.getX() <= getRange()){
-                int health = a.getHP() - getDmg();
-                a.setHP(health);
+            if(Math.abs(getX()-closest.getX()) <= getRange() && Math.abs(getY()-closest.getY()) <= getRange()){
+                int health = closest.getHP() - getDmg();
+                closest.setHP(health);
                 if(getWorld() instanceof Battlefield){
                         Battlefield b = (Battlefield)getWorld();
-                        int lostCash = b.getAICash() + 10;
+                        int lostCash = b.getAICash() + getDmg()*2;
                         b.setAICash(lostCash);
                         System.out.println("AI CASH: "+b.getAICash());
                 }
             }
-            else if(Math.abs(a.getX()-getX()) > Math.abs(a.getY()-getY())){
-                if(a.getX() - getX() < 0){
+            
+            else if(Math.abs(closest.getX()-getX()) > Math.abs(closest.getY()-getY())){
+                
+                if(closest.getX() - getX() < 0){
                     setLocation(getX()-1,getY());
                     fixLocation();
                 }
@@ -79,7 +97,8 @@ public class EmpireUnit extends Actor
                     fixLocation();
                 }
             }else{
-                if(a.getY()-getY() > 0){
+                
+                if(closest.getY()-getY() > 0){
                     setLocation(getX(), getY()+1);
                     fixLocation();
                 }
@@ -112,7 +131,7 @@ public class EmpireUnit extends Actor
         }
     }
 
-   
+    
 
     public boolean isNear(){
         if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
@@ -123,8 +142,8 @@ public class EmpireUnit extends Actor
         }
     }
 
-    public double getDistance(Actor a){
-        return Math.sqrt(Math.abs(a.getX()-getX())^2+Math.abs(a.getY()-getY())^2);
+    public double getDistance(UnionUnit a){
+        return Math.sqrt(Math.pow(Math.abs(a.getX()-getX()),2)+Math.pow(Math.abs(a.getY()-getY()),2));
     }
     
     public void hitByShell(){
@@ -132,3 +151,4 @@ public class EmpireUnit extends Actor
         boom.play();
     }
 }
+
