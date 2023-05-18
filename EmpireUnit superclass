@@ -9,6 +9,7 @@ public class EmpireUnit extends Actor
     private boolean isPlayer = false;
     private int oldX1 = 0;
     private int oldY1 = 0;
+    private int numChar = 4;
 
     public EmpireUnit(int HP, int dmg, int cost, int range) {
         this.HP = HP;
@@ -54,7 +55,7 @@ public class EmpireUnit extends Actor
         return range;
     }
     
-    public void AImove() { // UnionUnit a){
+     public void AImove() { // UnionUnit a){
         List<UnionUnit> list = getWorld().getObjects(UnionUnit.class);
         double shortestDistance = 99999;
         int index = -1;
@@ -71,6 +72,9 @@ public class EmpireUnit extends Actor
         UnionUnit closest = list.get(index);
         System.out.println("I AM "+this+" at "+ getX() + " " +getY());
         System.out.println(closest + " " + closest.getX() + " " + closest.getY() + " -- distance was : "+shortestDistance);
+        if(getnumChar() < 2){
+            addChar();
+        }
         if(!(Battlefield.getGameEnd())){
             int oldX = getX();
             int oldY = getY();
@@ -114,8 +118,8 @@ public class EmpireUnit extends Actor
             }
         }
     }
-    
-
+    public void addChar(){
+    }
     public void fixLocation(){
         if(getX() < 6){
             setLocation(6, getY());
