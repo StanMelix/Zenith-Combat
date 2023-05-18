@@ -12,14 +12,8 @@ public class AttackCell extends Actor
                     unitToBeAttacked = (EmpireUnit)a;
                 }
             }
-            if(((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
-                ((Battlefield)getWorld()).addObject(new RocketFlare(), (((Battlefield)getWorld()).selected).getX(),
+            ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
                 (((Battlefield)getWorld()).selected).getY());
-            }
-            else{
-                ((Battlefield)getWorld()).addObject(new MuzzleFlare(), (((Battlefield)getWorld()).selected).getX(),
-                (((Battlefield)getWorld()).selected).getY());
-            }
             if(((Battlefield)getWorld()).selected instanceof UnionTank ||
             ((Battlefield)getWorld()).selected instanceof UnionHelicopter && unitToBeAttacked instanceof EmpireTank){
                 ((Battlefield)getWorld()).addObject(new ShellHit(), unitToBeAttacked.getX(), unitToBeAttacked.getY());
@@ -33,7 +27,6 @@ public class AttackCell extends Actor
             }
             attackSound.play();
             Greenfoot.delay(30);
-            getWorld().removeObjects(getWorld().getObjects(RocketFlare.class));
             getWorld().removeObjects(getWorld().getObjects(MuzzleFlare.class));
             getWorld().removeObjects(getWorld().getObjects(ShellHit.class));
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
@@ -58,6 +51,8 @@ public class AttackCell extends Actor
             ((Battlefield)getWorld()).attackFinished();
             getWorld().removeObjects(getWorld().getObjects(AttackBase.class));
             getWorld().removeObjects(getWorld().getObjects(AttackCell.class));
+            
+            
         }
     }    
 }
