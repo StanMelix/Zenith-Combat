@@ -11,6 +11,9 @@ public class MainMenuButton extends Actor
             else if(getWorld() instanceof UnionWinVsEmpire){
                 ((UnionWinVsEmpire)getWorld()).goMain();
             }
+            else if(getWorld() instanceof Credits){
+                ((Credits)getWorld()).goMain();
+            }
         }
     }
 }
