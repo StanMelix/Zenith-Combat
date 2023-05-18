@@ -1,0 +1,11 @@
+import greenfoot.*;
+
+public class CreditsButton extends Actor
+{
+    public void act()
+    {
+        if(Greenfoot.mouseClicked(this)){
+            ((MainMenu)getWorld()).goCredits();
+        }
+    }
+}
