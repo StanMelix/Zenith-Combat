@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class MainMenu extends World
 {
-    GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
+    GreenfootSound unionTheme = new GreenfootSound("MainMenuTheme.mp3");
     public MainMenu()
     {
         super(21, 14, 60);
@@ -13,11 +13,19 @@ public class MainMenu extends World
     private void prepare(){
         PlayButton playButton = new PlayButton();
         addObject(playButton, 10, 9);
+        CreditsButton creditsButton = new CreditsButton();
+        addObject(creditsButton, 10, 11);
     }
     
     public void goInstructions(){
         unionTheme.stop();
         Instructions0 instructions0 = new Instructions0();
         Greenfoot.setWorld(instructions0);
+    }
+    
+    public void goCredits(){
+        unionTheme.stop();
+        Credits credits = new Credits();
+        Greenfoot.setWorld(credits);
     }
 }
