@@ -43,7 +43,7 @@ public class AttackCell extends Actor
                 unitToBeAttacked.setHP(unitToBeAttacked.getHP() - 75);
                 if(getWorld() instanceof Battlefield){
                     Battlefield b = (Battlefield)getWorld();
-                    int newCash = b.getPlayerCash() + ((Battlefield)getWorld()).selected.getDmg()*2;
+                    int newCash = b.getPlayerCash() + 150;
                     b.setPlayerCash(newCash);
                 }
             }
