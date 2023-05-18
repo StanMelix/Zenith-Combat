@@ -1,0 +1,23 @@
+import greenfoot.*;
+
+public class Credits extends World
+{
+    GreenfootSound unionTheme = new GreenfootSound("MainMenuTheme.mp3");
+    public Credits()
+    {    
+        super(21, 14, 60);
+        prepare();
+        unionTheme.playLoop();
+    }
+    
+    private void prepare(){
+        MainMenuButton mmb = new MainMenuButton();
+        addObject(mmb, 10, 11);
+    }
+    
+    public void goMain(){
+        unionTheme.stop();
+        MainMenu mainMenu = new MainMenu();
+        Greenfoot.setWorld(mainMenu);
+    }
+}
