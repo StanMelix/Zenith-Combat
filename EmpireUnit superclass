@@ -1,16 +1,15 @@
 import greenfoot.*;
-import greenfoot.*;
 import java.util.*;
 public class EmpireUnit extends Actor
 {
-    private static int HP = 100;
-    private static int dmg = 10;
-    private static int cost = 100;
-    private static int range = 2;
-    private static boolean isPlayer = false;
-    private static int oldX1 = 0;
-    private static int oldY1 = 0;
-   
+    private int HP = 100;
+    private int dmg = 10;
+    private int cost = 100;
+    private int range = 2;
+    private boolean isPlayer = false;
+    private int oldX1 = 0;
+    private int oldY1 = 0;
+    private int numChar = 4;
 
     public EmpireUnit(int HP, int dmg, int cost, int range) {
         this.HP = HP;
@@ -49,14 +48,17 @@ public class EmpireUnit extends Actor
         this.dmg = dmg;
     }
 
-    public static int getCost(){
+    public int getCost(){
         return cost;
     }
     public int getRange(){
         return range;
     }
+    public int getnumChar(){
+        return numChar;
+    }
     
-     public void AImove() { // UnionUnit a){
+    public void AImove() { // UnionUnit a){
         List<UnionUnit> list = getWorld().getObjects(UnionUnit.class);
         double shortestDistance = 99999;
         int index = -1;
@@ -126,7 +128,9 @@ public class EmpireUnit extends Actor
             }
         }
     }
-    
+    public void addChar(){
+    }
+
     public void fixLocation(){
         if(getX() < 6){
             setLocation(6, getY());
