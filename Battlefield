@@ -1,10 +1,11 @@
 import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 public class Battlefield extends World
 {
     private int playerCash = 0;
-    private int aiCash = 0;
+    private int aiCash = 125;
     private int turnNum = 0;
     //private int timer = 100;
     private int turnInt = 0;
@@ -143,11 +144,17 @@ public class Battlefield extends World
                 turnNum++;
                 
                 Greenfoot.delay(120);
-                if(turnNum%2 == 0){
-                    if(getAICash() > 0){
+                if(turnNum%2 == 0 && turnNum != 0){
+                    Random random = new Random();
+                    int max = 11;
+                    int mini = 2;
+                    int range = max - mini + 1;
+                    int y = (int)(Math.random()*range)+1;
+                    if(getAICash() >= 100){
                         if(getAICash() >= 750){
                             //Spawn Tank
                             EmpireTank Tank = new EmpireTank();
+                            addObject(Tank, 15, y);
                             int cash = getAICash() - 750;
                             setAICash(cash);
                             
@@ -156,25 +163,28 @@ public class Battlefield extends World
                             //Spawn Helicopter
                             
                             EmpireHelicopter Helicopter = new EmpireHelicopter();
+                            addObject(Helicopter, 15, y);
                             int cash = getAICash() - 500;
                             setAICash(cash);
                         }
                         else if(getAICash() >= 400 && getAICash() < 500){
                             //Spawn Officer
                             EmpireOfficer Officer = new EmpireOfficer();
+                            addObject(Officer, 15, y);
                             int cash = getAICash() - 400;
                             setAICash(cash);
                         }
                         else if(getAICash() >= 200 && getAICash() < 400){
                             //Spawn Machine gunner
                             EmpireMachineGunner MG = new EmpireMachineGunner();
+                            addObject(MG, 15, y);
                             int cash = getAICash() - 200;
                             setAICash(cash);
                         }
                         else{
                             //Spawn Rifleman
                             EmpireRifleman rifleman = new EmpireRifleman();
-                            addObject(rifleman, 6, 6);
+                            addObject(rifleman, 15, y);
                             System.out.println("spawned");
                             int cash = getAICash() - 100;
                             setAICash(cash);
