@@ -5,6 +5,7 @@ public class Battlefield extends World
 {
     private int playerCash = 0;
     private int aiCash = 0;
+    private int turnNum = 0;
     //private int timer = 100;
     private int turnInt = 0;
     private static boolean gameEnded = false;
@@ -105,8 +106,8 @@ public class Battlefield extends World
         addObject(rocketButton,15,0);
         SpawnNuke nukeButton = new SpawnNuke();
         addObject(nukeButton,17,0);
-        SellTurret sell = new SellTurret();
-        addObject(sell,19,0);
+        //SellTurret sell = new SellTurret();
+        //addObject(sell,19,0);
     }
 
     public void act(){
@@ -139,7 +140,47 @@ public class Battlefield extends World
             if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
                 showText("Computer", 1, 2);
                 turnInt = 1;
+                turnNum++;
+                
                 Greenfoot.delay(120);
+                if(turnNum%2 == 0){
+                    if(getAICash() > 0){
+                        if(getAICash() >= 750){
+                            //Spawn Tank
+                            EmpireTank Tank = new EmpireTank();
+                            int cash = getAICash() - 750;
+                            setAICash(cash);
+                            
+                        }
+                        else if(getAICash() >= 500 && getAICash() < 750){
+                            //Spawn Helicopter
+                            
+                            EmpireHelicopter Helicopter = new EmpireHelicopter();
+                            int cash = getAICash() - 500;
+                            setAICash(cash);
+                        }
+                        else if(getAICash() >= 400 && getAICash() < 500){
+                            //Spawn Officer
+                            EmpireOfficer Officer = new EmpireOfficer();
+                            int cash = getAICash() - 400;
+                            setAICash(cash);
+                        }
+                        else if(getAICash() >= 200 && getAICash() < 400){
+                            //Spawn Machine gunner
+                            EmpireMachineGunner MG = new EmpireMachineGunner();
+                            int cash = getAICash() - 200;
+                            setAICash(cash);
+                        }
+                        else{
+                            //Spawn Rifleman
+                            EmpireRifleman rifleman = new EmpireRifleman();
+                            addObject(rifleman, 6, 6);
+                            System.out.println("spawned");
+                            int cash = getAICash() - 100;
+                            setAICash(cash);
+                        }
+                    }
+                }
 
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
@@ -148,9 +189,9 @@ public class Battlefield extends World
 
                 List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
                 for(int i = 0; i < empireUnits.size(); i++){
-                    for(int j =0; j < unionUnits.size(); j++){
-                        empireUnits.get(i).AImove(unionUnits.get(j));
-                    }
+                   
+                        empireUnits.get(i).AImove();
+                    
 
                 }
 
@@ -161,6 +202,7 @@ public class Battlefield extends World
 
                 showText("Player", 1, 2);
                 showText("Nuke cooldown:" + nukeCooldown, 2, 13);
+                
                 turnInt = 0;
                 nukeCooldown++;
             }
@@ -180,6 +222,7 @@ public class Battlefield extends World
             //    showText("" + unionBase.getHP(), 18, 6);
             //}
         }
+        
     }
 
     public int getPlayerCash(){
