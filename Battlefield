@@ -107,7 +107,7 @@ public class Battlefield extends World
         addObject(rocketButton,15,0);
         SpawnNuke nukeButton = new SpawnNuke();
         addObject(nukeButton,17,0);
-        SellButton sell = new SellButton();
+        SellTurret sell = new SellTurret();
         addObject(sell,19,0);
     }
 
