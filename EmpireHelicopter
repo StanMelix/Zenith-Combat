@@ -4,7 +4,7 @@ public class EmpireHelicopter extends EmpireUnit
 {
     public boolean isPlayer = false;
     public EmpireHelicopter() {
-        super(150, 40, 500,2);
+        super(150, 40, 500,2, new GreenfootSound("MGFire.mp3"));
     }
     
     public boolean getIsPlayer() {
