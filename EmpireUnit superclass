@@ -51,13 +51,15 @@ public class EmpireUnit extends Actor
     public int getCost(){
         return cost;
     }
+
     public int getRange(){
         return range;
     }
+
     public int getnumChar(){
         return numChar;
     }
-    
+
     public void AImove() { // UnionUnit a){
         List<UnionUnit> list = getWorld().getObjects(UnionUnit.class);
         double shortestDistance = 99999;
@@ -82,25 +84,31 @@ public class EmpireUnit extends Actor
                 int health = ((Battlefield)getWorld()).unionBase.getHP() - getDmg();
                 ((Battlefield)getWorld()).unionBase.setHP(health);
                 if(getWorld() instanceof Battlefield){
-                        Battlefield b = (Battlefield)getWorld();
-                        int lostCash = b.getAICash() + getDmg()*2;
-                        b.setAICash(lostCash);
-                        System.out.println("AI CASH: "+b.getAICash());
+                    Battlefield b = (Battlefield)getWorld();
+                    int lostCash = b.getAICash() + getDmg()*2;
+                    b.setAICash(lostCash);
+                    System.out.println("AI CASH: "+b.getAICash());
                 }
             }
             else if(Math.abs(getX()-closest.getX()) <= getRange() && Math.abs(getY()-closest.getY()) <= getRange()){
-                int health = closest.getHP() - getDmg();
-                closest.setHP(health);
+                if(this instanceof EmpireHelicopter && closest instanceof UnionTank){
+                    int health = closest.getHP() - 75;
+                    closest.setHP(health);
+                }
+                else{
+                    int health = closest.getHP() - getDmg();
+                    closest.setHP(health);
+                }
                 if(getWorld() instanceof Battlefield){
-                        Battlefield b = (Battlefield)getWorld();
-                        int lostCash = b.getAICash() + getDmg()*2;
-                        b.setAICash(lostCash);
-                        System.out.println("AI CASH: "+b.getAICash());
+                    Battlefield b = (Battlefield)getWorld();
+                    int lostCash = b.getAICash() + getDmg()*2;
+                    b.setAICash(lostCash);
+                    System.out.println("AI CASH: "+b.getAICash());
                 }
             }
-            
+
             else if(Math.abs(closest.getX()-getX()) > Math.abs(closest.getY()-getY())){
-                
+
                 if(closest.getX() - getX() < 0){
                     setLocation(getX()-1,getY());
                     fixLocation();
@@ -111,7 +119,7 @@ public class EmpireUnit extends Actor
                     fixLocation();
                 }
             }else{
-                
+
                 if(closest.getY()-getY() > 0){
                     setLocation(getX(), getY()+1);
                     fixLocation();
@@ -128,6 +136,7 @@ public class EmpireUnit extends Actor
             }
         }
     }
+
     public void addChar(){
     }
 
@@ -146,7 +155,6 @@ public class EmpireUnit extends Actor
         }
     }
 
-    
 
     public boolean isNear(){
         if(getObjectsInRange(1, EmpireRifleman.class).size() == 0){
@@ -160,7 +168,7 @@ public class EmpireUnit extends Actor
     public double getDistance(UnionUnit a){
         return Math.sqrt(Math.pow(Math.abs(a.getX()-getX()),2)+Math.pow(Math.abs(a.getY()-getY()),2));
     }
-    
+
     public void hitByShell(){
         GreenfootSound boom = new GreenfootSound("Boom.mp3");
         boom.play();
