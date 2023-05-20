@@ -144,7 +144,6 @@ public class Battlefield extends World
                 playerCash += 50;
                 showText("Computer", 1, 2);
                 turnInt = 1;
-                Greenfoot.delay(120);
                 turnNum++;
                 List<UnionUnit> unionUnits = new ArrayList<UnionUnit>(getObjects(UnionUnit.class));
                 for(int i = 0; i < unionUnits.size(); i++){
