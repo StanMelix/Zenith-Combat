@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class UnionBase extends Actor
 {
-    private int HP = 1000;
+    private int HP = 500;
     private boolean isPlayer = true;
     public void act() 
     {
