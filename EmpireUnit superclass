@@ -25,13 +25,13 @@ public class EmpireUnit extends Actor
 
     public void act()
     {
-        ((Battlefield)getWorld()).showText("", oldX1, oldY1);
+        //((Battlefield)getWorld()).showText("", oldX1, oldY1);
         ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
-        int oldX = getX();
-        int oldY = getY();
+        //int oldX = getX();
+        //int oldY = getY();
 
-        oldX1 = oldX;
-        oldY1 = oldY;
+        //oldX1 = oldX;
+        //oldY1 = oldY;
     }
 
     public int getHP(){
@@ -121,6 +121,11 @@ public class EmpireUnit extends Actor
                     setLocation(getX() + 1, getY());
                     fixLocation();
                 }
+                oldX1 = oldX;
+                oldY1 = oldY;
+                
+                ((Battlefield)getWorld()).showText("", oldX1, oldY1);
+                ((Battlefield)getWorld()).showText("" + getHP(), getX(), getY());
             }else{
 
                 if(closest.getY()-getY() > 0){
