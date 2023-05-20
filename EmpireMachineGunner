@@ -4,7 +4,7 @@ public class EmpireMachineGunner extends EmpireUnit
 {
     public boolean isPlayer = false;
     public EmpireMachineGunner() {
-        super(125, 40, 200,2);
+        super(125, 40, 200,2, new GreenfootSound("MGFire.mp3"));
     }
     
     public boolean getIsPlayer() {
