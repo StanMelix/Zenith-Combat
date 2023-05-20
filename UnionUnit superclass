@@ -107,7 +107,7 @@ public class UnionUnit extends Actor
         if(!(Battlefield.getGameEnd())){
             //battlefield left X bound = 6, right X bound = 14
             //battlefield top Y bound = 2, battlefield bottom Y bound = 11
-            if(this instanceof UnionOfficer){
+            if(this instanceof UnionOfficer || this instanceof UnionHelicopter){
                 for(int x = getX() - 2; x <= getX() + 2; x += 1) {
                     for(int y = getY() - 2; y <= getY() + 2; y += 1) {
                         if(!(getX() == x && getY() == y) && x >= 6 && x <= 14 && y >= 2 && y <= 11 && getWorld().getObjectsAt(x,y,Actor.class).size() == 0) {
