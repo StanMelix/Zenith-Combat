@@ -31,7 +31,7 @@ public class AttackBase extends Actor
             getWorld().removeObjects(getWorld().getObjects(BulletHit.class));
             if(((Battlefield)getWorld()).selected instanceof UnionHelicopter){
                 b.hitByShell();
-                b.setHP(b.getHP() - 30);
+                b.setHP(b.getHP() - 40);
             }
             else{
                 b.setHP(b.getHP() - ((Battlefield)getWorld()).selected.getDmg());
