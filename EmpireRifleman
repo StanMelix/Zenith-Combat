@@ -4,7 +4,7 @@ public class EmpireRifleman extends EmpireUnit
 {
     public boolean isPlayer = false;
     public EmpireRifleman() {
-        super(100, 35, 100,2);
+        super(100, 35, 100,2, new GreenfootSound("RifleFire.mp3"));
     }
     
     public boolean getIsPlayer() {
