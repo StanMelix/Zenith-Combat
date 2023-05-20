@@ -4,7 +4,7 @@ public class EmpireOfficer extends EmpireUnit
 {
     public boolean isPlayer = false;
     public EmpireOfficer() {
-        super(75, 30, 400,2);
+        super(75, 30, 400,2, new GreenfootSound("PistolFire.mp3"));
     }
     
     public boolean getIsPlayer() {
