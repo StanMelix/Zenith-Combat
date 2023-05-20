@@ -112,25 +112,27 @@ public class Battlefield extends World
     }
 
     public void act(){
-        if(unionBase.getHP() == 0 || empireBase.getHP() == 0){
+        if(unionBase.getHP() <= 0 || empireBase.getHP() <= 0){
             // Ends the game if one of the bases is destroyed.
             gameEnded = true;
             //unionTheme.stop();
             if(unionBase.getIsPlayer()){
-                if(unionBase.getHP() == 0){
+                if(unionBase.getHP() <= 0){
+                    unionTheme.stop();
                     EmpireWinVsUnion b = new EmpireWinVsUnion();
                     Greenfoot.setWorld(b);
                 }
-                else if(empireBase.getHP() == 0){
+                else if(empireBase.getHP() <= 0){
+                    unionTheme.stop();
                     UnionWinVsEmpire b = new UnionWinVsEmpire();
                     Greenfoot.setWorld(b);
                 }
             }
             else{
-                if(empireBase.getHP() == 0){
+                if(empireBase.getHP() <= 0){
                     showText("Union Victory", 1, 1);
                 }
-                else if(unionBase.getHP() == 0){
+                else if(unionBase.getHP() <= 0){
                     showText("Empire Victory", 1, 1);
                 }
             }
@@ -139,6 +141,7 @@ public class Battlefield extends World
             // Progresses the game's turns.
             //timer--;
             if(Greenfoot.mouseClicked(readyButton) && turnInt == 0){
+                playerCash += 50;
                 showText("Computer", 1, 2);
                 turnInt = 1;
                 Greenfoot.delay(120);
@@ -161,11 +164,7 @@ public class Battlefield extends World
                     unionTurrets.get(i).reset();
                 }
                  if(turnNum%2 == 0 && turnNum != 0){
-                   
-                    int max = 11;
-                    int mini = 2;
-                    int range = max - mini + 1;
-                    int y = (int)(Math.random()*range)+1;
+                    int y = (int)(Math.random()*10)+2;
                     if(getAICash() >= 100){
                         if(getAICash() >= 750){
                             //Spawn Tank
@@ -207,7 +206,7 @@ public class Battlefield extends World
                         }
                     }
                 }
-
+                setAICash(getAICash() + 100);
                 showText("Player", 1, 2);
                 showText("Nuke cooldown:" + nukeCooldown, 2, 13);
                 turnInt = 0;
