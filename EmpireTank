@@ -4,7 +4,7 @@ public class EmpireTank extends EmpireUnit
 {
     public boolean isPlayer = false;
     public EmpireTank() {
-        super(225, 75, 3,3);
+        super(225, 75, 3,3, new GreenfootSound("CannonFire.mp3"));
     }
     
     public boolean getIsPlayer() {
