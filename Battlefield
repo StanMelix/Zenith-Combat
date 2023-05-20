@@ -17,7 +17,6 @@ public class Battlefield extends World
     EmpireBase empireBase = new EmpireBase();
     AttackButton attackButton = new AttackButton();
     MoveButton moveButton = new MoveButton();
-    
     GreenfootSound unionTheme = new GreenfootSound("UnionTheme.mp3");
     public Battlefield()
     {    
@@ -153,16 +152,16 @@ public class Battlefield extends World
                 List<EmpireUnit> empireUnits = new ArrayList<EmpireUnit>(getObjects(EmpireUnit.class));
                 for(int i = 0; i < empireUnits.size(); i++){
                     //for(int j  = 0; j < unionUnits.size(); j++){
-                        empireUnits.get(i).AImove();//unionUnits.get(j));
-                    //}
-                    
+                    empireUnits.get(i).AImove();//unionUnits.get(j));
+                    Greenfoot.delay(30);
+
                 }
 
                 List<UnionTurret> unionTurrets = new ArrayList<UnionTurret>(getObjects(UnionTurret.class));
                 for(int i = 0; i < unionTurrets.size(); i++){
                     unionTurrets.get(i).reset();
                 }
-                 if(turnNum%2 == 0 && turnNum != 0){
+                if(turnNum%2 == 0 && turnNum != 0){
                     int y = (int)(Math.random()*10)+2;
                     if(getAICash() >= 100){
                         if(getAICash() >= 750){
@@ -171,11 +170,11 @@ public class Battlefield extends World
                             addObject(Tank, 14, y);
                             int cash = getAICash() - 750;
                             setAICash(cash);
-                            
+
                         }
                         else if(getAICash() >= 500 && getAICash() < 750){
                             //Spawn Helicopter
-                            
+
                             EmpireHelicopter Helicopter = new EmpireHelicopter();
                             addObject(Helicopter, 14, y);
                             int cash = getAICash() - 500;
