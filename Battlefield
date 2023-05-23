@@ -11,6 +11,7 @@ public class Battlefield extends World
     private int nukeCooldown = 10;
     ReadyButton readyButton = new ReadyButton();
     private int turnNum = 0;
+    private int newY = 0;
     UnionUnit selected;
     UnionTurret selectedT;
     UnionBase unionBase = new UnionBase();
@@ -157,50 +158,65 @@ public class Battlefield extends World
 
                 }
 
+                int lucky = (int) Math.random() * 3;
+                if(lucky == 0){lucky = 1;}
                 List<UnionTurret> unionTurrets = new ArrayList<UnionTurret>(getObjects(UnionTurret.class));
                 for(int i = 0; i < unionTurrets.size(); i++){
                     unionTurrets.get(i).reset();
                 }
-                if(turnNum%2 == 0 && turnNum != 0){
+                if(turnNum%lucky == 0 && turnNum != 0){
                     int y = (int)(Math.random()*10)+2;
                     if(getAICash() >= 100){
                         if(getAICash() >= 750){
                             //Spawn Tank
-                            EmpireTank Tank = new EmpireTank();
-                            addObject(Tank, 14, y);
-                            int cash = getAICash() - 750;
-                            setAICash(cash);
-
+                            boolean s = spawnable(y);
+                            if(s){
+                                EmpireTank Tank = new EmpireTank();
+                                addObject(Tank, 14, newY);
+                                int cash = getAICash() - 750;
+                                setAICash(cash);
+                            }
                         }
                         else if(getAICash() >= 500 && getAICash() < 750){
                             //Spawn Helicopter
-
-                            EmpireHelicopter Helicopter = new EmpireHelicopter();
-                            addObject(Helicopter, 14, y);
-                            int cash = getAICash() - 500;
-                            setAICash(cash);
+                            boolean s = spawnable(y);
+                            if(s){
+                                EmpireHelicopter Helicopter = new EmpireHelicopter();
+                                addObject(Helicopter, 14, newY);
+                                int cash = getAICash() - 500;
+                                setAICash(cash);
+                            }
                         }
                         else if(getAICash() >= 400 && getAICash() < 500){
                             //Spawn Officer
-                            EmpireOfficer Officer = new EmpireOfficer();
-                            addObject(Officer, 14, y);
-                            int cash = getAICash() - 400;
-                            setAICash(cash);
+                            boolean s = spawnable(y);
+                            if(s){
+                                EmpireOfficer Officer = new EmpireOfficer();
+                                addObject(Officer, 14, newY);
+                                int cash = getAICash() - 400;
+                                setAICash(cash);
+                            }
                         }
                         else if(getAICash() >= 200 && getAICash() < 400){
                             //Spawn Machine gunner
-                            EmpireMachineGunner MG = new EmpireMachineGunner();
-                            addObject(MG, 14, y);
-                            int cash = getAICash() - 200;
-                            setAICash(cash);
+                            boolean s = spawnable(y);
+                            if(s){
+                                EmpireMachineGunner MG = new EmpireMachineGunner();
+                                addObject(MG, 14, newY);
+                                int cash = getAICash() - 200;
+                                setAICash(cash);
+                            }
                         }
                         else{
                             //Spawn Rifleman
-                            EmpireRifleman rifleman = new EmpireRifleman();
-                            addObject(rifleman, 14, y);
-                            System.out.println("spawned");
-                            int cash = getAICash() - 100;
-                            setAICash(cash);
+                            boolean s = spawnable(y);
+                            if(s){
+                                EmpireRifleman rifleman = new EmpireRifleman();
+                                addObject(rifleman, 14, newY);
+                                System.out.println("spawned");
+                                int cash = getAICash() - 100;
+                                setAICash(cash);
+                            }
                         }
                     }
                 }
@@ -226,6 +242,24 @@ public class Battlefield extends World
             //    showText("" + unionBase.getHP(), 18, 6);
             //}
         }
+    }
+
+    public boolean spawnable(int y){
+        if(getObjectsAt(14,y,Actor.class).size() == 1){
+            y--;
+            if(getObjectsAt(14,y,Actor.class).size() == 1){
+                y+=2;
+                if(getObjectsAt(14,y,Actor.class).size() == 1){
+                    return false;
+                }
+            }
+        }
+        newY(y);
+        return true;
+    }
+
+    public void newY(int y){
+        newY = y;
     }
 
     public int getPlayerCash(){
